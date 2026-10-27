@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Daily Coach - Bài 25</title>
+</head>
+<body>
+<div id="eng-app"></div>
+<style>
+  #eng-app {
+    --bg: #fbf6ee;
+    --card: #fffaf2;
+    --ink: #4a3b30;
+    --ink-soft: #8a7a6a;
+    --accent: #d97a52;
+    --accent-soft: #f1c6a8;
+    --good: #7a9a6e;
+    --good-bg: rgba(122,154,110,0.12);
+    --bad: #c4654f;
+    --bad-bg: rgba(196,101,79,0.1);
+    --tip: #c79a3a;
+    --tip-bg: rgba(199,154,58,0.12);
+    --border: rgba(74,59,48,0.12);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: linear-gradient(160deg, #fdf2e3 0%, #fbf6ee 60%, #f7ecdd 100%);
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 840px;
+    margin: 20px auto;
+    box-sizing: border-box;
+  }
+  #eng-app * { box-sizing: border-box; }
+  .eng-header { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:20px; flex-wrap: wrap; }
+  .eng-title { font-size: 22px; font-weight: 700; margin: 0 0 4px; }
+  .eng-sub { color: var(--ink-soft); font-size: 14px; margin: 0; }
+  .eng-badge {
+    background: rgba(255,255,255,0.55); backdrop-filter: blur(8px);
+    border: 1px solid var(--border); border-radius: 14px;
+    padding: 10px 14px; font-size: 13px; text-align: right; min-width: 130px;
+  }
+  .eng-badge b { font-size: 18px; display:block; color: var(--accent); }
+  .eng-card {
+    background: rgba(255,255,255,0.68); backdrop-filter: blur(10px);
+    border: 1px solid var(--border); border-radius: 16px;
+    padding: 24px; margin-bottom: 22px;
+    box-shadow: 0 4px 20px rgba(74,59,48,0.06);
+  }
+  .eng-section-title { font-size: 17px; font-weight: 800; margin: 0 0 14px; display:flex; align-items:center; gap:8px; color: var(--accent); }
+  .eng-section-sub { font-size: 13px; color: var(--ink-soft); margin: -4px 0 16px; font-weight: 500; }
+
+  .eng-flash-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+  .eng-flash {
+    position: relative; background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 12px; text-align: center; cursor: pointer;
+    min-height: 100px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transition: transform 0.15s ease, border-color 0.15s ease; user-select: none;
+  }
+  .eng-flash:hover { transform: translateY(-2px); border-color: var(--accent-soft); }
+  .eng-flash .front { font-weight: 700; font-size: 14px; }
+  .eng-pos { font-size: 11px; color: var(--accent); font-weight: 600; font-style: italic; margin-left: 4px; }
+  .eng-flash .ipa { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+  .eng-flash .back { display:none; font-size: 12px; color: var(--ink-soft); margin-top:4px; }
+  .eng-flash.flipped .front { color: var(--accent); }
+  .eng-flash.flipped .back { display:block; }
+  .eng-example { font-size: 11px; color: var(--ink-soft); font-style: italic; margin-top: 4px; display:none; text-align:center; }
+  .eng-flash.flipped .eng-example { display:block; }
+  .eng-speak {
+    position:absolute; top:6px; right:6px; width:22px; height:22px; border-radius:50%;
+    border: none; background: rgba(217,122,82,0.12); color: var(--accent);
+    font-size: 12px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .eng-speak:hover { background: rgba(217,122,82,0.22); }
+
+  .eng-formula-box {
+    background: rgba(255,255,255,0.7);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0 16px;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .eng-formula-title { font-weight: 800; color: var(--accent); font-size: 15px; margin-bottom: 8px; }
+
+  .eng-grammar-ex { background: rgba(217,122,82,0.08); border-radius: 10px; padding: 12px 16px; margin-top: 10px; font-size: 13px; line-height:1.7; }
+  .eng-mistake { display:flex; gap:14px; flex-wrap:wrap; margin-top:14px; }
+  .eng-mistake-box { flex:1; min-width:220px; border-radius: 10px; padding: 12px 14px; font-size: 13px; }
+  .eng-mistake-box.wrong { background: var(--bad-bg); }
+  .eng-mistake-box.right { background: var(--good-bg); }
+  .eng-mistake-box b { display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px; }
+  .eng-mistake-box.wrong b { color: var(--bad); }
+  .eng-mistake-box.right b { color: var(--good); }
+  .eng-tip-box { margin-top: 12px; background: var(--tip-bg); border-radius: 10px; padding: 12px 14px; font-size: 13px; display:flex; gap:8px; line-height:1.6; }
+
+  .eng-dialogue-line { display:flex; gap:12px; margin-bottom: 14px; align-items:flex-start; }
+  .eng-dialogue-avatar {
+    width: 32px; height: 32px; border-radius: 50%; background: var(--accent-soft); color: var(--ink);
+    display:flex; align-items:center; justify-content:center; font-size: 13px; font-weight:700; flex-shrink:0;
+  }
+  .eng-dialogue-bubble { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 10px 14px; flex:1; }
+  .eng-dialogue-en { font-size: 14px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .eng-dialogue-vi { font-size: 12px; color: var(--ink-soft); margin-top: 4px; display:none; }
+  .eng-dialogue-vi.show { display:block; }
+  .eng-toggle-vi { background:none; border:none; color: var(--accent); font-size:13px; cursor:pointer; text-decoration:underline; padding:0; margin-top:8px; font-weight:600; }
+
+  .eng-ex-block { margin-bottom: 26px; }
+  .eng-ex-block:last-child { margin-bottom: 0; }
+  .eng-quiz-q { margin-bottom: 16px; }
+  .eng-quiz-q p { font-weight: 600; margin: 0 0 8px; font-size: 14px; }
+  .eng-opt {
+    display:block; width:100%; text-align:left; background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 14px; margin-bottom: 6px; cursor:pointer; font-size: 14px; color: var(--ink);
+  }
+  .eng-opt:hover { border-color: var(--accent-soft); }
+  .eng-opt.selected { border-color: var(--accent); background: rgba(217,122,82,0.1); }
+  .eng-opt.correct { border-color: var(--good); background: var(--good-bg); }
+  .eng-opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
+
+  .eng-fill-input {
+    border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; font-size: 14px;
+    width: 160px; background: var(--card); color: var(--ink); font-family: inherit;
+  }
+  .eng-fill-input.correct { border-color: var(--good); background: var(--good-bg); }
+  .eng-fill-input.wrong { border-color: var(--bad); background: var(--bad-bg); }
+  .eng-fill-hint { font-size: 11px; color: var(--ink-soft); margin-top: 4px; }
+
+  .eng-build-pool, .eng-build-answer {
+    display:flex; flex-wrap:wrap; gap:8px; min-height: 44px; padding: 8px;
+    border-radius: 10px; border: 1px dashed var(--border);
+  }
+  .eng-build-answer { background: rgba(255,255,255,0.4); margin-bottom: 8px; }
+  .eng-build-word {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 6px 12px; font-size: 14px; cursor: pointer; user-select:none;
+  }
+  .eng-build-word:hover { border-color: var(--accent-soft); }
+  .eng-build-word.used { opacity: 0.35; cursor: default; }
+  .eng-build-result { font-size: 12px; margin-top: 6px; font-weight:600; }
+  .eng-build-result.correct { color: var(--good); }
+  .eng-build-result.wrong { color: var(--bad); }
+
+  .eng-btn {
+    background: var(--accent); color: white; border: none; border-radius: 12px;
+    padding: 12px 26px; font-size: 15px; font-weight: 800; cursor: pointer;
+  }
+  .eng-btn:hover { opacity: 0.92; }
+  .eng-btn.ghost { background: rgba(217,122,82,0.12); color: var(--accent); }
+  .eng-result { margin-top: 16px; padding: 16px; border-radius: 12px; background: var(--good-bg); font-size: 15px; display:none; font-weight:700; text-align:center; }
+
+  .eng-nav {
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    margin-top: 16px; flex-wrap: wrap;
+  }
+  .eng-nav-link {
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+    min-width: 120px; border-radius: 12px; padding: 10px 18px;
+    background: rgba(217,122,82,0.12); color: var(--accent); text-decoration:none;
+    font-size: 13px; font-weight: 700; border: 1px solid rgba(217,122,82,0.18);
+  }
+  .eng-nav-link:hover { background: rgba(217,122,82,0.2); }
+  .eng-nav-link.primary { background: var(--accent); color: #fff; }
+</style>
+
+<script>
+(function(){
+  const lessonData = {
+  "id": "s25",
+  "title": "Bài thi Tổng Ôn Cụm 5",
+  "grammar": null,
+  "questions": {
+    "multipleChoice": [
+      {
+        "question": "Question 1 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 2 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 3 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 4 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 5 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 6 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 7 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 8 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 9 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 10 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 11 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 12 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 13 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 14 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 15 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 16 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 17 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 18 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 19 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "Question 20 for multipleChoice",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ],
+        "correctAnswer": "Option A",
+        "explanation": "",
+        "hint": ""
+      }
+    ],
+    "fillBlank": [
+      {
+        "question": "This is a fill in the ___ question 1.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 2.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 3.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 4.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 5.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 6.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 7.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 8.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 9.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 10.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 11.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 12.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 13.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 14.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 15.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 16.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 17.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "question": "This is a fill in the ___ question 18.",
+        "correctAnswer": "blank",
+        "explanation": "",
+        "hint": ""
+      }
+    ],
+    "sentenceBuild": [
+      {
+        "words": [
+          "This",
+          "is",
+          "a",
+          "sentence"
+        ],
+        "correctSentence": "This is a sentence",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "words": [
+          "This",
+          "is",
+          "a",
+          "sentence"
+        ],
+        "correctSentence": "This is a sentence",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "words": [
+          "This",
+          "is",
+          "a",
+          "sentence"
+        ],
+        "correctSentence": "This is a sentence",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "words": [
+          "This",
+          "is",
+          "a",
+          "sentence"
+        ],
+        "correctSentence": "This is a sentence",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "words": [
+          "This",
+          "is",
+          "a",
+          "sentence"
+        ],
+        "correctSentence": "This is a sentence",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "words": [
+          "This",
+          "is",
+          "a",
+          "sentence"
+        ],
+        "correctSentence": "This is a sentence",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "words": [
+          "This",
+          "is",
+          "a",
+          "sentence"
+        ],
+        "correctSentence": "This is a sentence",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "words": [
+          "This",
+          "is",
+          "a",
+          "sentence"
+        ],
+        "correctSentence": "This is a sentence",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "words": [
+          "This",
+          "is",
+          "a",
+          "sentence"
+        ],
+        "correctSentence": "This is a sentence",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "words": [
+          "This",
+          "is",
+          "a",
+          "sentence"
+        ],
+        "correctSentence": "This is a sentence",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "words": [
+          "This",
+          "is",
+          "a",
+          "sentence"
+        ],
+        "correctSentence": "This is a sentence",
+        "explanation": "",
+        "hint": ""
+      },
+      {
+        "words": [
+          "This",
+          "is",
+          "a",
+          "sentence"
+        ],
+        "correctSentence": "This is a sentence",
+        "explanation": "",
+        "hint": ""
+      }
+    ]
+  }
+};
+
+  const KEY_STREAK = "eng:streak";
+  const KEY_DAYS = "eng:completed-days";
+  const dayId = `g8-s${lessonData.session}`;
+  const ttsOk = typeof window.speechSynthesis !== "undefined";
+
+  function speak(text) {
+    if (!ttsOk) return;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "en-US";
+      u.rate = 0.92;
+      window.speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
+  const app = document.getElementById("eng-app");
+
+  function speakBtn(text) {
+    return ttsOk ? `<button class="eng-speak" data-speak="${text.replace(/"/g, '&quot;')}" title="Nghe đọc">🔊</button>` : "";
+  }
+
+  function flashHtml(v, i) {
+    return `<div class="eng-flash" data-i="${i}">
+      ${speakBtn(v.en)}
+      <div class="front">${v.en} ${v.pos ? `<span class="eng-pos">(${v.pos})</span>` : ""}</div>
+      ${v.ipa ? `<div class="ipa">${v.ipa}</div>` : ""}
+      <div class="back">${v.vi}</div>
+      <div class="eng-example">"${v.example}"</div>
+    </div>`;
+  }
+
+  function dialogueHtml(d) {
+    return d.lines.map((line, i) => `
+      <div class="eng-dialogue-line">
+        <div class="eng-dialogue-avatar">${line.speaker}</div>
+        <div class="eng-dialogue-bubble">
+          <div class="eng-dialogue-en">${line.en} ${speakBtn(line.en)}</div>
+          <div class="eng-dialogue-vi" data-vi="${i}">${line.vi}</div>
+        </div>
+      </div>`).join("") + `<button class="eng-toggle-vi" id="eng-toggle-vi">Hiện nghĩa tiếng Việt</button>`;
+  }
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function normalize(s) {
+    return s.toLowerCase().replace(/[.?!,]/g, "").trim().replace(/\s+/g, " ");
+  }
+
+  function navHtml() {
+    const s = lessonData.session;
+    const prevHref = s === 1 ? "index.html" : `english-g8-s${s-1}.html`;
+    const nextHref = s === 5 ? "index.html" : `english-g8-s${s+1}.html`;
+    const nextLabel = s === 5 ? "Về trang chủ" : "Bài tiếp →";
+
+    return `<div class="eng-nav">
+      <a class="eng-nav-link" href="${prevHref}">← Quay lại</a>
+      <a class="eng-nav-link" href="index.html">Trang chủ</a>
+      <a class="eng-nav-link primary" href="${nextHref}">${nextLabel}</a>
+    </div>`;
+  }
+
+  function render() {
+    const streak = parseInt(localStorage.getItem(KEY_STREAK) || "1");
+    const completedDays = JSON.parse(localStorage.getItem(KEY_DAYS) || "[]");
+    const completedCount = completedDays.length;
+
+    const ex = lessonData.exercises;
+
+    app.innerHTML = `
+      <div class="eng-header">
+        <div>
+          <p class="eng-title">Grade 8 · Bài ${lessonData.session}: ${lessonData.title}</p>
+          <p class="eng-sub">${lessonData.titleEn}</p>
+        </div>
+        <div class="eng-badge">Streak<b>${streak} 🔥</b>Đã học ${completedCount} bài</div>
+      </div>
+
+      <div class="eng-card">
+        <p class="eng-section-title">📇 16 Từ vựng trọng tâm (bấm để lật thẻ, bấm 🔊 để nghe)</p>
+        <div class="eng-flash-grid">${lessonData.vocab.map(flashHtml).join("")}</div>
+      </div>
+
+      <div class="eng-card">
+        <p class="eng-section-title">📘 Ngữ pháp: ${lessonData.grammar.point}</p>
+        <div>${lessonData.grammar.explanation}</div>
+        <div class="eng-grammar-ex">${lessonData.grammar.examples.join("<br/>")}</div>
+        ${lessonData.grammar.commonMistake ? `
+        <div class="eng-mistake">
+          <div class="eng-mistake-box wrong"><b>❌ Sai thường gặp</b>${lessonData.grammar.commonMistake.wrong}</div>
+          <div class="eng-mistake-box right"><b>✅ Đúng</b>${lessonData.grammar.commonMistake.right}</div>
+        </div>
+        <p class="eng-section-sub" style="margin-top:8px;">${lessonData.grammar.commonMistake.note}</p>` : ""}
+        ${lessonData.grammar.memoryTip ? `<div class="eng-tip-box">💡 ${lessonData.grammar.memoryTip}</div>` : ""}
+      </div>
+
+      ${lessonData.dialogue ? `
+      <div class="eng-card">
+        <p class="eng-section-title">💬 Hội thoại thực tế mở rộng (8 lượt thoại)</p>
+        <p class="eng-section-sub">${lessonData.dialogue.titleVi}</p>
+        ${dialogueHtml(lessonData.dialogue)}
+      </div>` : ""}
+
+      <div class="eng-card">
+        <p class="eng-section-title">✏️ Bài tập chuyên sâu (25 Câu)</p>
+
+        ${ex.multipleChoice && ex.multipleChoice.length ? `
+        <div class="eng-ex-block">
+          <p class="eng-section-sub">Phần 1 · Trắc nghiệm ngữ pháp & từ vựng (10 câu)</p>
+          <div id="eng-mc"></div>
+        </div>` : ""}
+
+        ${ex.fillBlank && ex.fillBlank.length ? `
+        <div class="eng-ex-block">
+          <p class="eng-section-sub">Phần 2 · Chia động từ đúng theo công thức (8 câu)</p>
+          <div id="eng-fill"></div>
+        </div>` : ""}
+
+        ${ex.sentenceBuild && ex.sentenceBuild.length ? `
+        <div class="eng-ex-block">
+          <p class="eng-section-sub">Phần 3 · Ghép câu hoàn chỉnh (7 câu)</p>
+          <div id="eng-build"></div>
+        </div>` : ""}
+
+        ${ex.transformation && ex.transformation.length ? `
+        <div class="eng-ex-block">
+          <p class="eng-section-sub">Phần 4 · Viết lại câu (Sentence Transformation)</p>
+          <div id="eng-transform"></div>
+        </div>` : ""}
+
+        ${ex.review && ex.review.length ? `
+        <div class="eng-ex-block" style="background: rgba(217,122,82,0.05); border-color: rgba(217,122,82,0.2);">
+          <p class="eng-section-sub" style="color: #c56842;">Phần 5 · Ôn tập bài cũ (Spaced Repetition)</p>
+          <div id="eng-review"></div>
+        </div>` : ""}
+
+
+        <button class="eng-btn" id="eng-submit">Kiểm tra kết quả 50 câu</button>
+        <div class="eng-result" id="eng-result"></div>
+      </div>
+
+      ${navHtml()}
+    `;
+
+    // event listeners
+    app.querySelectorAll("[data-speak]").forEach(btn => {
+      btn.addEventListener("click", (e) => { e.stopPropagation(); speak(btn.dataset.speak); });
+    });
+
+    app.querySelectorAll(".eng-flash").forEach(el => {
+      el.addEventListener("click", (e) => {
+        if (e.target.closest(".eng-speak")) return;
+        el.classList.toggle("flipped");
+      });
+    });
+
+    const toggleBtn = document.getElementById("eng-toggle-vi");
+    if (toggleBtn) {
+      let shown = false;
+      toggleBtn.addEventListener("click", () => {
+        shown = !shown;
+        app.querySelectorAll(".eng-dialogue-vi").forEach(el => el.classList.toggle("show", shown));
+        toggleBtn.textContent = shown ? "Ẩn nghĩa tiếng Việt" : "Hiện nghĩa tiếng Việt";
+      });
+    }
+
+    // Multiple Choice
+    const mcSelections = {};
+    const mcBox = document.getElementById("eng-mc");
+    if (mcBox) {
+      ex.multipleChoice.forEach((q, qi) => {
+        const block = document.createElement("div");
+        block.className = "eng-quiz-q";
+        block.innerHTML = `<p>${qi + 1}. ${q.q}</p>` +
+          q.options.map(opt => `<button class="eng-opt" data-qi="${qi}" data-opt="${opt}">${opt}</button>`).join("");
+        mcBox.appendChild(block);
+      });
+      mcBox.querySelectorAll(".eng-opt").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const qi = btn.dataset.qi;
+          mcBox.querySelectorAll(`.eng-opt[data-qi="${qi}"]`).forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          mcSelections[qi] = btn.dataset.opt;
+        });
+      });
+    }
+
+    // Fill Blank
+    const fillBox = document.getElementById("eng-fill");
+    if (fillBox) {
+      ex.fillBlank.forEach((q, qi) => {
+        const parts = q.sentence.split("___");
+        const block = document.createElement("div");
+        block.className = "eng-quiz-q";
+        block.innerHTML = `<p>${qi + 1}. ${parts[0]}<input class="eng-fill-input" data-qi="${qi}" type="text"/>${parts[1] || ""}</p>`;
+        fillBox.appendChild(block);
+      });
+    }
+
+    // Sentence Build
+    const buildBox = document.getElementById("eng-build");
+    const buildState = {};
+    if (buildBox) {
+      ex.sentenceBuild.forEach((q, qi) => {
+        const wrap = document.createElement("div");
+        wrap.className = "eng-quiz-q";
+        wrap.innerHTML = `<p>${qi + 1}. Ghép từ thành câu:</p>
+          <div class="eng-build-answer" id="eng-build-ans-${qi}"></div>
+          <div class="eng-build-pool" id="eng-build-pool-${qi}"></div>
+          <button class="eng-btn ghost" data-reset="${qi}" style="margin-top:6px; padding:6px 14px; font-size:12px;">Làm lại</button>
+          <div class="eng-build-result" id="eng-build-result-${qi}"></div>`;
+        buildBox.appendChild(wrap);
+        buildState[qi] = { order: shuffle(q.words.map((w, wi) => ({ w, wi }))), used: new Set(), chosen: [] };
+        renderBuildPool(qi);
+      });
+
+      function renderBuildPool(qi) {
+        const pool = document.getElementById(`eng-build-pool-${qi}`);
+        const ans = document.getElementById(`eng-build-ans-${qi}`);
+        const st = buildState[qi];
+        pool.innerHTML = st.order.map(item => `
+          <button class="eng-build-word ${st.used.has(item.wi) ? 'used' : ''}" data-qi="${qi}" data-wi="${item.wi}">${item.w}</button>
+        `).join("");
+        ans.innerHTML = st.chosen.map(item => `
+          <span class="eng-build-word">${item.w}</span>
+        `).join("");
+
+        pool.querySelectorAll(".eng-build-word:not(.used)").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const wi = parseInt(btn.dataset.wi);
+            const item = st.order.find(x => x.wi === wi);
+            st.used.add(wi);
+            st.chosen.push(item);
+            renderBuildPool(qi);
+          });
+        });
+      }
+
+      buildBox.querySelectorAll("[data-reset]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const qi = btn.dataset.reset;
+          buildState[qi].used.clear();
+          buildState[qi].chosen = [];
+          document.getElementById(`eng-build-result-${qi}`).textContent = "";
+          renderBuildPool(qi);
+        });
+      });
+    }
+
+    // Submit
+    document.getElementById("eng-submit").addEventListener("click", () => {
+      let correct = 0;
+      let total = 0;
+
+      if (ex.multipleChoice) {
+        ex.multipleChoice.forEach((q, qi) => {
+          total++;
+          const selected = mcSelections[qi];
+          const btns = mcBox.querySelectorAll(`.eng-opt[data-qi="${qi}"]`);
+          btns.forEach(b => {
+            if (selected) {
+              if (b.dataset.opt === q.answer) b.classList.add("correct");
+              if (b.dataset.opt === selected && selected !== q.answer) b.classList.add("wrong");
+            }
+          });
+          if (selected && selected === q.answer) {
+            correct++;
+          }
+        });
+      }
+
+      if (ex.fillBlank) {
+        ex.fillBlank.forEach((q, qi) => {
+          total++;
+          const input = fillBox ? fillBox.querySelector(`.eng-fill-input[data-qi="${qi}"]`) : null;
+          const val = input ? input.value.trim().toLowerCase() : "";
+          if (val && val === q.answer.toLowerCase()) {
+            input.classList.add("correct");
+            correct++;
+          } else {
+            if (input) {
+              input.classList.add("wrong");
+              if (!val) input.placeholder = `Chưa làm (${q.answer})`;
+            }
+          }
+        });
+      }
+
+      if (ex.sentenceBuild) {
+        ex.sentenceBuild.forEach((q, qi) => {
+          total++;
+          const st = buildState[qi];
+          const userSentence = st && st.chosen ? st.chosen.map(x => x.w).join(" ") : "";
+          const resEl = document.getElementById(`eng-build-result-${qi}`);
+          if (userSentence && normalize(userSentence) === normalize(q.answer)) {
+            if (resEl) {
+              resEl.className = "eng-build-result correct";
+              resEl.textContent = "✅ Chính xác!";
+            }
+            correct++;
+          } else {
+            if (resEl) {
+              resEl.className = "eng-build-result wrong";
+              resEl.textContent = !userSentence ? `❌ Chưa làm. Đáp án: "${q.answer}"` : `❌ Chưa đúng. Đáp án: "${q.answer}"`;
+            }
+          }
+        });
+      }
+
+      
+      if (ex.transformation) {
+        const transBox = document.getElementById("eng-transform");
+        ex.transformation.forEach((q, qi) => {
+          total++;
+          const input = transBox ? transBox.querySelector(`.trans-input[data-qi="${qi}"]`) : null;
+          const val = input ? input.value.trim().toLowerCase() : "";
+          const cleanVal = val.replace(/[.,!?]/g, '').replace(/\s+/g, ' ');
+          const cleanAns = q.answer.toLowerCase().replace(/[.,!?]/g, '').replace(/\s+/g, ' ');
+          if (cleanVal && cleanVal === cleanAns) {
+            if (input) input.classList.add("correct");
+            correct++;
+          } else {
+            if (input) {
+              input.classList.add("wrong");
+              if (!val) input.placeholder = `Chưa làm (${q.answer})`;
+              else input.value = `${input.value} (Sai, đáp án: ${q.answer})`;
+            }
+          }
+        });
+      }
+
+      if (ex.review) {
+        const revBox = document.getElementById("eng-review");
+        ex.review.forEach((q, qi) => {
+          total++;
+          const input = revBox ? revBox.querySelector(`.review-input[data-qi="${qi}"]`) : null;
+          const val = input ? input.value.trim().toLowerCase() : "";
+          if (val && val === q.answer.toLowerCase()) {
+            if (input) input.classList.add("correct");
+            correct++;
+          } else {
+            if (input) {
+              input.classList.add("wrong");
+              if (!val) input.placeholder = `Chưa làm (${q.answer})`;
+            }
+          }
+        });
+      }
+
+      const resBox = document.getElementById("eng-result");
+      resBox.style.display = "block";
+      resBox.innerHTML = `Bạn đạt <b>${correct}/${total}</b> điểm! 🎉`;
+
+      if (correct >= 25 && !completedDays.includes(dayId)) {
+        completedDays.push(dayId);
+        localStorage.setItem(KEY_DAYS, JSON.stringify(completedDays));
+        localStorage.setItem(KEY_STREAK, (streak + 1).toString());
+      }
+
+      const scoreStr = `${correct}/${total} câu`;
+      triggerAutoSync(`Nộp bài ${lessonData.title}`, scoreStr, lessonData.title);
+    });
+
+    function triggerAutoSync(exitReason, quizScore, quizTitle) {
+      const name = localStorage.getItem('eng:student-name') || 'Học sinh chưa nhập tên';
+      const completedDays = JSON.parse(localStorage.getItem(KEY_DAYS) || '[]');
+      const streak = localStorage.getItem(KEY_STREAK) || '1';
+      const now = new Date().toLocaleString('vi-VN');
+
+      const payload = {
+        name,
+        lessonTitle: quizTitle || lessonData.title || "Bài 1",
+        score: quizScore || `Đã pass ${completedDays.length}/5 bài`,
+        completedCount: completedDays.length,
+        completedDays,
+        streak,
+        timestamp: now,
+        reason: exitReason || 'App Exit / Hide'
+      };
+
+      localStorage.setItem('eng:last-sync-snapshot', JSON.stringify(payload));
+      localStorage.setItem('eng:last-sync-time', now);
+
+      const DEFAULT_SYNC_URL = 'https://script.google.com/macros/s/AKfycbzVXmeXIu4Tf36Tjs9WiRyvtEB3WTxhSoReXyhqySDnze8aVaFTFW39em2cdfdzlWOR/exec';
+      const syncUrl = localStorage.getItem('eng:sync-server-url') || DEFAULT_SYNC_URL;
+      if (syncUrl) {
+        fetch(syncUrl, {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          mode: 'no-cors'
+        }).catch(() => {});
+      }
+    }
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

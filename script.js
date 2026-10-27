@@ -1,0 +1,537 @@
+
+(function(){
+  const lessonData = {
+    course: "g8",
+    session: 1,
+    title: "Hiện tại đơn vs. Hiện tại tiếp diễn (16 Từ vựng & 25 Bài tập)",
+    titleEn: "Present Simple vs. Present Continuous - 16 Vocabularies & 25 Intensive Practice Items",
+
+    vocab: [
+      { en: "leisure activity", pos: "n phr", ipa: "/ˈleʒər ækˈtɪvəti/", vi: "hoạt động rảnh rỗi", example: "Playing chess is my favorite leisure activity." },
+      { en: "craft kit", pos: "n phr", ipa: "/kræft kɪt/", vi: "bộ làm thủ công", example: "She bought a craft kit to make paper flowers." },
+      { en: "harvest time", pos: "n phr", ipa: "/ˈhɑːrvɪst taɪm/", vi: "mùa thu hoạch", example: "Farmers work hard during harvest time." },
+      { en: "paddy field", pos: "n phr", ipa: "/ˈpædi fiːld/", vi: "cánh đồng lúa", example: "Buffaloes are grazing in the paddy field." },
+      { en: "hang out", pos: "v phr", ipa: "/hæŋ aʊt/", vi: "đi chơi la cà", example: "We usually hang out after class." },
+      { en: "peaceful", pos: "adj", ipa: "/ˈpiːsfl/", vi: "yên bình", example: "Life in the countryside is very peaceful." },
+      { en: "stative verb", pos: "n phr", ipa: "/ˈsteɪtɪv vɜːrb/", vi: "động từ trạng thái", example: "Like, love, need, want are stative verbs." },
+      { en: "habitual action", pos: "n phr", ipa: "/həˈbɪtʃuəl ˈækʃn/", vi: "hành động theo thói quen", example: "The present simple expresses habitual actions." },
+      { en: "origami", pos: "n", ipa: "/ˌɔːrɪˈɡɑːmi/", vi: "gấp giấy Nhật Bản", example: "My sister likes folding origami dragons." },
+      { en: "socialize", pos: "v", ipa: "/ˈsoʊʃəlaɪz/", vi: "giao lưu kết bạn", example: "Teenagers socialize through sports and clubs." },
+      { en: "countryside", pos: "n", ipa: "/ˈkʌntrisaɪd/", vi: "vùng nông thôn", example: "Fresh air is abundant in the countryside." },
+      { en: "herding buffaloes", pos: "v phr", ipa: "/ˈhɜːrdɪŋ ˈbʌfəloʊz/", vi: "chăn trâu", example: "Children in rural areas enjoy herding buffaloes." },
+      { en: "loading rice", pos: "v phr", ipa: "/ˈloʊdɪŋ raɪs/", vi: "bốc vác lúa", example: "Farmers are loading rice onto the truck." },
+      { en: "hospitable", pos: "adj", ipa: "/hɑːˈspɪtəbl/", vi: "hiếu khách", example: "Local residents are friendly and hospitable." },
+      { en: "vast", pos: "adj", ipa: "/væst/", vi: "bao la, rộng lớn", example: "Look at the vast green fields!" },
+      { en: "picturesque", pos: "adj", ipa: "/ˌpɪktʃəˈresk/", vi: "đẹp như tranh vẽ", example: "The mountain village is picturesque." }
+    ],
+
+    grammar: {
+      point: "CÔNG THỨC CHI TIẾT 100% CỦA 2 THÌ HIỆN TẠI",
+      explanation: `
+        <div class="eng-formula-box">
+          <div class="eng-formula-title">📌 1. THÌ HIỆN TẠI ĐƠN (Present Simple Tense)</div>
+          <b>• Khẳng định (+)</b>:<br/>
+          &nbsp;&nbsp;- Động từ TO BE: <code>S + am / is / are + N/Adj</code> (<i>I am, He/She/It is, You/We/They are</i>)<br/>
+          &nbsp;&nbsp;- Động từ thường: <code>S + V(bare) / V(s/es)</code> (<i>He/She/It + V_s/es; I/We/They + V_bare</i>)<br/>
+          <b>• Phủ định (-)</b>:<br/>
+          &nbsp;&nbsp;- Động từ TO BE: <code>S + am / is / are + NOT + N/Adj</code><br/>
+          &nbsp;&nbsp;- Động từ thường: <code>S + do / does + NOT + V(bare)</code> (<i>don't / doesn't + V_nguyên_thể</i>)<br/>
+          <b>• Nghi vấn Yes/No (?)</b>:<br/>
+          &nbsp;&nbsp;- TO BE: <code>Am / Is / Are + S + N/Adj?</code> ➔ <i>Yes, S + am/is/are. / No, S + am/is/are + not.</i><br/>
+          &nbsp;&nbsp;- Động từ thường: <code>Do / Does + S + V(bare)?</code> ➔ <i>Yes, S + do/does. / No, S + don't/doesn't.</i><br/>
+          <b>• Câu hỏi Wh- (?)</b>: <code>Wh- + do / does / am / is / are + S + V(bare)?</code><br/>
+          <b>• Quy tắc thêm -es</b>: Động từ tận cùng bằng: <i>-o, -s, -z, -ch, -x, -sh</i> (Mẹo: <u>O</u>ng <u>S</u>áu <u>Z</u>ui <u>Ch</u>ạy <u>X</u>e <u>Sh</u>).
+        </div>
+
+        <div class="eng-formula-box">
+          <div class="eng-formula-title">📌 2. THÌ HIỆN TẠI TIẾP DIỄN (Present Continuous Tense)</div>
+          <b>• Khẳng định (+)</b>: <code>S + am / is / are + V-ing</code><br/>
+          <b>• Phủ định (-)</b>: <code>S + am / is / are + NOT + V-ing</code> (<i>isn't / aren't</i>)<br/>
+          <b>• Nghi vấn Yes/No (?)</b>: <code>Am / Is / Are + S + V-ing?</code> ➔ <i>Yes, S + am/is/are. / No, S + isn't/aren't.</i><br/>
+          <b>• Câu hỏi Wh- (?)</b>: <code>Wh- + am / is / are + S + V-ing?</code><br/>
+          <b>• Quy tắc thêm -ing</b>:<br/>
+          &nbsp;&nbsp;- Bỏ <i>-e</i> câm ở cuối: <i>make ➔ making, write ➔ writing</i>.<br/>
+          &nbsp;&nbsp;- Động từ 1 âm tiết kết thúc dạng Phụ-Nguyên-Phụ âm ➔ Gấp đôi phụ âm cuối: <i>run ➔ running, swim ➔ swimming</i>.<br/>
+          <b>• ĐỘNG TỪ TRẠNG THÁI (Stative Verbs)</b>: Tuyệt đối KHÔNG dùng dạng -ing với các từ chỉ cảm xúc/nhận thức: <i>like, love, want, need, know, understand, believe, remember</i>.
+        </div>
+      `,
+      examples: [
+        "<b>Hiện tại đơn:</b> What <b>does</b> he <b>do</b> in his free time? — He <b>plays</b> chess.",
+        "<b>Hiện tại tiếp diễn:</b> <b>Are</b> you <b>making</b> paper flowers right now? — Yes, I <b>am</b>."
+      ],
+      commonMistake: {
+        wrong: "I am wanting a new craft kit right now.",
+        right: "I **want** a new craft kit right now.",
+        note: "Động từ 'want' là Động từ Trạng thái (Stative Verb) ➔ Bắt buộc chia Hiện tại đơn, KHÔNG chia 'am wanting' dù có từ 'right now'!"
+      },
+      memoryTip: "Mẹo thi Lớp 8: Gặp các từ 'like, love, want, need, know' ➔ Chọn ngay Hiện tại đơn!"
+    },
+
+    dialogue: {
+      titleVi: "Tình huống: Trò chuyện về mùa thu hoạch ở quê và các hoạt động giải trí",
+      lines: [
+        { speaker: "Minh", en: "Hi Mai! What do you usually do in your free time?", vi: "Chào Mai! Bạn thường làm gì vào thời gian rảnh?" },
+        { speaker: "Mai", en: "I usually fold origami or make crafts with my craft kit. It's very relaxing.", vi: "Mình thường gấp giấy origami hoặc làm đồ thủ công. Rất thư giãn." },
+        { speaker: "Minh", en: "Are you working on a new craft kit right now?", vi: "Ngay lúc này bạn có đang làm bộ craft kit mới nào không?" },
+        { speaker: "Mai", en: "No, I'm not. I am visiting my grandparents in the countryside.", vi: "Không. Mình đang thăm ông bà ở vùng nông thôn." },
+        { speaker: "Minh", en: "That sounds picturesque! Are the farmers loading rice in the paddy fields?", vi: "Nghe đẹp như tranh vẽ quá! Nông dân có đang bốc vác lúa trên đồng không?" },
+        { speaker: "Mai", en: "Yes! They are working hard because it is harvest time now.", vi: "Có chứ! Họ đang làm việc hăng hái vì bây giờ đang là mùa thu hoạch." },
+        { speaker: "Minh", en: "Do children there help with herding buffaloes?", vi: "Trẻ em ở đó có phụ giúp chăn trâu không?" },
+        { speaker: "Mai", en: "Yes, they do. They socialize and play traditional games on the vast fields.", vi: "Có chứ. Các bạn ấy giao lưu và chơi trò chơi dân gian trên những cánh đồng bao la." }
+      ]
+    },
+
+    exercises: {
+      multipleChoice: [
+        { q: "Listen! The birds ___ in the garden.", options: ["sing", "are singing", "sings"], answer: "are singing" },
+        { q: "My father ___ to work by bus every day.", options: ["is going", "go", "goes"], answer: "goes" },
+        { q: "At the moment, we ___ our leisure activities.", options: ["enjoy", "are enjoying", "enjoys"], answer: "are enjoying" },
+        { q: "Do you ___ how to fold an origami dragon?", options: ["know", "knowing", "are knowing"], answer: "know" },
+        { q: "Look! The farmers ___ rice onto the truck.", options: ["load", "are loading", "loads"], answer: "are loading" },
+        { q: "She ___ to socialize with new friends at school.", options: ["likes", "is liking", "like"], answer: "likes" },
+        { q: "What ___ you ___ now?", options: ["do / do", "are / doing", "does / doing"], answer: "are / doing" },
+        { q: "The local people in this village are very ___ .", options: ["hospitable", "peacefully", "harvest"], answer: "hospitable" },
+        { q: "Children in rural areas often enjoy ___ buffaloes.", options: ["herding", "loading", "folding"], answer: "herding" },
+        { q: "The scenery of the mountain village is ___ .", options: ["picturesque", "stative", "habitual"], answer: "picturesque" }
+      ],
+      fillBlank: [
+        { sentence: "She usually ___ (hang out) with friends on Saturday.", answer: "hangs out", hint: "hiện tại đơn" },
+        { sentence: "Look! They ___ (harvest) rice in the field.", answer: "are harvesting", hint: "hiện tại tiếp diễn" },
+        { sentence: "I ___ (not / want) to play computer games now.", answer: "do not want", hint: "phủ định hiện tại đơn của động từ trạng thái" },
+        { sentence: "My brother ___ (fold) an origami bird at the moment.", answer: "is folding", hint: "hiện tại tiếp diễn" },
+        { sentence: "Every summer, we ___ (visit) our grandparents in the countryside.", answer: "visit", hint: "hiện tại đơn số nhiều" },
+        { sentence: "Listen! Somebody ___ (knock) at the door.", answer: "is knocking", hint: "hiện tại tiếp diễn" },
+        { sentence: "They ___ (not / study) English right now; they are playing sports.", answer: "are not studying", hint: "phủ định hiện tại tiếp diễn" },
+        { sentence: "Why ___ you ___ (look) at me like that?", answer: "are looking", hint: "câu hỏi hiện tại tiếp diễn (are ... looking)" }
+      ],
+      
+      transformation: [
+        { sentence: "Does she enjoy watching TV? (like)", hint: "Sử dụng động từ like", answer: "Does she like watching TV?" },
+        { sentence: "I don't have an origami class today. (am not)", hint: "Hiện tại tiếp diễn", answer: "I am not having an origami class today." },
+        { sentence: "He is a good football player. (plays)", hint: "Động từ thường play", answer: "He plays football well." },
+        { sentence: "What is your father's job? (do)", hint: "Sử dụng do", answer: "What does your father do?" },
+        { sentence: "Look! A dog is chasing the cat. (running)", hint: "Sử dụng run after", answer: "Look! A dog is running after the cat." }
+      ],
+      review: [
+        { sentence: "What ___ (be) your favorite subject in Grade 7?", answer: "was", hint: "Quá khứ to be" },
+        { sentence: "I ___ (go) to the zoo last weekend.", answer: "went", hint: "Quá khứ đơn của go" },
+        { sentence: "They ___ (not / finish) their project yesterday.", answer: "did not finish", hint: "Phủ định quá khứ đơn" },
+        { sentence: "She ___ (have) a great time at the camp last summer.", answer: "had", hint: "Quá khứ đơn của have" },
+        { sentence: "___ you ___ (visit) your grandparents last Tet?", answer: "Did visit", hint: "Câu hỏi quá khứ đơn" }
+      ],
+      sentenceBuild: [
+        { words: ["is", "She", "making", "crafts", "now", "."], answer: "She is making crafts now ." },
+        { words: ["We", "play", "usually", "chess", "together", "."], answer: "We usually play chess together ." },
+        { words: ["Look", "!", "They", "are", "herding", "buffaloes", "."], answer: "Look ! They are herding buffaloes ." },
+        { words: ["Life", "in", "countryside", "the", "is", "peaceful", "."], answer: "Life in the countryside is peaceful ." },
+        { words: ["Do", "you", "want", "to", "socialize", "here", "?"], answer: "Do you want to socialize here ?" },
+        { words: ["He", "is", "folding", "origami", "right", "now", "."], answer: "He is folding origami right now ." },
+        { words: ["Farmers", "are", "loading", "rice", "today", "."], answer: "Farmers are loading rice today ." }
+      ]
+    }
+  };
+
+  const KEY_STREAK = "eng:streak";
+  const KEY_DAYS = "eng:completed-days";
+  const dayId = `g8-s${lessonData.session}`;
+  const ttsOk = typeof window.speechSynthesis !== "undefined";
+
+  function speak(text) {
+    if (!ttsOk) return;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "en-US";
+      u.rate = 0.92;
+      window.speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
+  const app = document.getElementById("eng-app");
+
+  function speakBtn(text) {
+    return ttsOk ? `<button class="eng-speak" data-speak="${text.replace(/"/g, '&quot;')}" title="Nghe đọc">🔊</button>` : "";
+  }
+
+  function flashHtml(v, i) {
+    return `<div class="eng-flash" data-i="${i}">
+      ${speakBtn(v.en)}
+      <div class="front">${v.en} ${v.pos ? `<span class="eng-pos">(${v.pos})</span>` : ""}</div>
+      ${v.ipa ? `<div class="ipa">${v.ipa}</div>` : ""}
+      <div class="back">${v.vi}</div>
+      <div class="eng-example">"${v.example}"</div>
+    </div>`;
+  }
+
+  function dialogueHtml(d) {
+    return d.lines.map((line, i) => `
+      <div class="eng-dialogue-line">
+        <div class="eng-dialogue-avatar">${line.speaker}</div>
+        <div class="eng-dialogue-bubble">
+          <div class="eng-dialogue-en">${line.en} ${speakBtn(line.en)}</div>
+          <div class="eng-dialogue-vi" data-vi="${i}">${line.vi}</div>
+        </div>
+      </div>`).join("") + `<button class="eng-toggle-vi" id="eng-toggle-vi">Hiện nghĩa tiếng Việt</button>`;
+  }
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function normalize(s) {
+    return s.toLowerCase().replace(/[.?!,]/g, "").trim().replace(/\s+/g, " ");
+  }
+
+  function navHtml() {
+    const s = lessonData.session;
+    const prevHref = s === 1 ? "index.html" : `english-g8-s${s-1}.html`;
+    const nextHref = s === 5 ? "index.html" : `english-g8-s${s+1}.html`;
+    const nextLabel = s === 5 ? "Về trang chủ" : "Bài tiếp →";
+
+    return `<div class="eng-nav">
+      <a class="eng-nav-link" href="${prevHref}">← Quay lại</a>
+      <a class="eng-nav-link" href="index.html">Trang chủ</a>
+      <a class="eng-nav-link primary" href="${nextHref}">${nextLabel}</a>
+    </div>`;
+  }
+
+  function render() {
+    const streak = parseInt(localStorage.getItem(KEY_STREAK) || "1");
+    const completedDays = JSON.parse(localStorage.getItem(KEY_DAYS) || "[]");
+    const completedCount = completedDays.length;
+
+    const ex = lessonData.exercises;
+
+    app.innerHTML = `
+      <div class="eng-header">
+        <div>
+          <p class="eng-title">Grade 8 · Bài ${lessonData.session}: ${lessonData.title}</p>
+          <p class="eng-sub">${lessonData.titleEn}</p>
+        </div>
+        <div class="eng-badge">Streak<b>${streak} 🔥</b>Đã học ${completedCount} bài</div>
+      </div>
+
+      <div class="eng-card">
+        <p class="eng-section-title">📇 16 Từ vựng trọng tâm (bấm để lật thẻ, bấm 🔊 để nghe)</p>
+        <div class="eng-flash-grid">${lessonData.vocab.map(flashHtml).join("")}</div>
+      </div>
+
+      <div class="eng-card">
+        <p class="eng-section-title">📘 Ngữ pháp: ${lessonData.grammar.point}</p>
+        <div>${lessonData.grammar.explanation}</div>
+        <div class="eng-grammar-ex">${lessonData.grammar.examples.join("<br/>")}</div>
+        ${lessonData.grammar.commonMistake ? `
+        <div class="eng-mistake">
+          <div class="eng-mistake-box wrong"><b>❌ Sai thường gặp</b>${lessonData.grammar.commonMistake.wrong}</div>
+          <div class="eng-mistake-box right"><b>✅ Đúng</b>${lessonData.grammar.commonMistake.right}</div>
+        </div>
+        <p class="eng-section-sub" style="margin-top:8px;">${lessonData.grammar.commonMistake.note}</p>` : ""}
+        ${lessonData.grammar.memoryTip ? `<div class="eng-tip-box">💡 ${lessonData.grammar.memoryTip}</div>` : ""}
+      </div>
+
+      ${lessonData.dialogue ? `
+      <div class="eng-card">
+        <p class="eng-section-title">💬 Hội thoại thực tế mở rộng (8 lượt thoại)</p>
+        <p class="eng-section-sub">${lessonData.dialogue.titleVi}</p>
+        ${dialogueHtml(lessonData.dialogue)}
+      </div>` : ""}
+
+      <div class="eng-card">
+        <p class="eng-section-title">✏️ Bài tập chuyên sâu (25 Câu)</p>
+
+        ${ex.multipleChoice && ex.multipleChoice.length ? `
+        <div class="eng-ex-block">
+          <p class="eng-section-sub">Phần 1 · Trắc nghiệm ngữ pháp & từ vựng (10 câu)</p>
+          <div id="eng-mc"></div>
+        </div>` : ""}
+
+        ${ex.fillBlank && ex.fillBlank.length ? `
+        <div class="eng-ex-block">
+          <p class="eng-section-sub">Phần 2 · Chia động từ đúng theo công thức (8 câu)</p>
+          <div id="eng-fill"></div>
+        </div>` : ""}
+
+        ${ex.sentenceBuild && ex.sentenceBuild.length ? `
+        <div class="eng-ex-block">
+          <p class="eng-section-sub">Phần 3 · Ghép câu hoàn chỉnh (7 câu)</p>
+          <div id="eng-build"></div>
+        </div>` : ""}
+
+        ${ex.transformation && ex.transformation.length ? `
+        <div class="eng-ex-block">
+          <p class="eng-section-sub">Phần 4 · Viết lại câu (Sentence Transformation)</p>
+          <div id="eng-transform"></div>
+        </div>` : ""}
+
+        ${ex.review && ex.review.length ? `
+        <div class="eng-ex-block" style="background: rgba(217,122,82,0.05); border-color: rgba(217,122,82,0.2);">
+          <p class="eng-section-sub" style="color: #c56842;">Phần 5 · Ôn tập bài cũ (Spaced Repetition)</p>
+          <div id="eng-review"></div>
+        </div>` : ""}
+
+
+        <button class="eng-btn" id="eng-submit">Kiểm tra kết quả 25 câu</button>
+        <div class="eng-result" id="eng-result"></div>
+      </div>
+
+      ${navHtml()}
+    `;
+
+    // event listeners
+    app.querySelectorAll("[data-speak]").forEach(btn => {
+      btn.addEventListener("click", (e) => { e.stopPropagation(); speak(btn.dataset.speak); });
+    });
+
+    app.querySelectorAll(".eng-flash").forEach(el => {
+      el.addEventListener("click", (e) => {
+        if (e.target.closest(".eng-speak")) return;
+        el.classList.toggle("flipped");
+      });
+    });
+
+    const toggleBtn = document.getElementById("eng-toggle-vi");
+    if (toggleBtn) {
+      let shown = false;
+      toggleBtn.addEventListener("click", () => {
+        shown = !shown;
+        app.querySelectorAll(".eng-dialogue-vi").forEach(el => el.classList.toggle("show", shown));
+        toggleBtn.textContent = shown ? "Ẩn nghĩa tiếng Việt" : "Hiện nghĩa tiếng Việt";
+      });
+    }
+
+    // Multiple Choice
+    const mcSelections = {};
+    const mcBox = document.getElementById("eng-mc");
+    if (mcBox) {
+      ex.multipleChoice.forEach((q, qi) => {
+        const block = document.createElement("div");
+        block.className = "eng-quiz-q";
+        block.innerHTML = `<p>${qi + 1}. ${q.q}</p>` +
+          q.options.map(opt => `<button class="eng-opt" data-qi="${qi}" data-opt="${opt}">${opt}</button>`).join("");
+        mcBox.appendChild(block);
+      });
+      mcBox.querySelectorAll(".eng-opt").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const qi = btn.dataset.qi;
+          mcBox.querySelectorAll(`.eng-opt[data-qi="${qi}"]`).forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          mcSelections[qi] = btn.dataset.opt;
+        });
+      });
+    }
+
+    // Fill Blank
+    const fillBox = document.getElementById("eng-fill");
+    if (fillBox) {
+      ex.fillBlank.forEach((q, qi) => {
+        const parts = q.sentence.split("___");
+        const block = document.createElement("div");
+        block.className = "eng-quiz-q";
+        block.innerHTML = `<p>${qi + 1}. ${parts[0]}<input class="eng-fill-input" data-qi="${qi}" type="text"/>${parts[1] || ""}</p>`;
+        fillBox.appendChild(block);
+      });
+    }
+
+    // Sentence Build
+    const buildBox = document.getElementById("eng-build");
+    const buildState = {};
+    if (buildBox) {
+      ex.sentenceBuild.forEach((q, qi) => {
+        const wrap = document.createElement("div");
+        wrap.className = "eng-quiz-q";
+        wrap.innerHTML = `<p>${qi + 1}. Ghép từ thành câu:</p>
+          <div class="eng-build-answer" id="eng-build-ans-${qi}"></div>
+          <div class="eng-build-pool" id="eng-build-pool-${qi}"></div>
+          <button class="eng-btn ghost" data-reset="${qi}" style="margin-top:6px; padding:6px 14px; font-size:12px;">Làm lại</button>
+          <div class="eng-build-result" id="eng-build-result-${qi}"></div>`;
+        buildBox.appendChild(wrap);
+        buildState[qi] = { order: shuffle(q.words.map((w, wi) => ({ w, wi }))), used: new Set(), chosen: [] };
+        renderBuildPool(qi);
+      });
+
+      function renderBuildPool(qi) {
+        const pool = document.getElementById(`eng-build-pool-${qi}`);
+        const ans = document.getElementById(`eng-build-ans-${qi}`);
+        const st = buildState[qi];
+        pool.innerHTML = st.order.map(item => `
+          <button class="eng-build-word ${st.used.has(item.wi) ? 'used' : ''}" data-qi="${qi}" data-wi="${item.wi}">${item.w}</button>
+        `).join("");
+        ans.innerHTML = st.chosen.map(item => `
+          <span class="eng-build-word">${item.w}</span>
+        `).join("");
+
+        pool.querySelectorAll(".eng-build-word:not(.used)").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const wi = parseInt(btn.dataset.wi);
+            const item = st.order.find(x => x.wi === wi);
+            st.used.add(wi);
+            st.chosen.push(item);
+            renderBuildPool(qi);
+          });
+        });
+      }
+
+      buildBox.querySelectorAll("[data-reset]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const qi = btn.dataset.reset;
+          buildState[qi].used.clear();
+          buildState[qi].chosen = [];
+          document.getElementById(`eng-build-result-${qi}`).textContent = "";
+          renderBuildPool(qi);
+        });
+      });
+    }
+
+    // Submit
+    document.getElementById("eng-submit").addEventListener("click", () => {
+      let correct = 0;
+      let total = 0;
+
+      if (ex.multipleChoice) {
+        ex.multipleChoice.forEach((q, qi) => {
+          total++;
+          const selected = mcSelections[qi];
+          const btns = mcBox.querySelectorAll(`.eng-opt[data-qi="${qi}"]`);
+          btns.forEach(b => {
+            if (selected) {
+              if (b.dataset.opt === q.answer) b.classList.add("correct");
+              if (b.dataset.opt === selected && selected !== q.answer) b.classList.add("wrong");
+            }
+          });
+          if (selected && selected === q.answer) {
+            correct++;
+          }
+        });
+      }
+
+      if (ex.fillBlank) {
+        ex.fillBlank.forEach((q, qi) => {
+          total++;
+          const input = fillBox ? fillBox.querySelector(`.eng-fill-input[data-qi="${qi}"]`) : null;
+          const val = input ? input.value.trim().toLowerCase() : "";
+          if (val && val === q.answer.toLowerCase()) {
+            input.classList.add("correct");
+            correct++;
+          } else {
+            if (input) {
+              input.classList.add("wrong");
+              if (!val) input.placeholder = `Chưa làm (${q.answer})`;
+            }
+          }
+        });
+      }
+
+      if (ex.sentenceBuild) {
+        ex.sentenceBuild.forEach((q, qi) => {
+          total++;
+          const st = buildState[qi];
+          const userSentence = st && st.chosen ? st.chosen.map(x => x.w).join(" ") : "";
+          const resEl = document.getElementById(`eng-build-result-${qi}`);
+          if (userSentence && normalize(userSentence) === normalize(q.answer)) {
+            if (resEl) {
+              resEl.className = "eng-build-result correct";
+              resEl.textContent = "✅ Chính xác!";
+            }
+            correct++;
+          } else {
+            if (resEl) {
+              resEl.className = "eng-build-result wrong";
+              resEl.textContent = !userSentence ? `❌ Chưa làm. Đáp án: "${q.answer}"` : `❌ Chưa đúng. Đáp án: "${q.answer}"`;
+            }
+          }
+        });
+      }
+
+      
+      if (ex.transformation) {
+        const transBox = document.getElementById("eng-transform");
+        ex.transformation.forEach((q, qi) => {
+          total++;
+          const input = transBox ? transBox.querySelector(`.trans-input[data-qi="${qi}"]`) : null;
+          const val = input ? input.value.trim().toLowerCase() : "";
+          const cleanVal = val.replace(/[.,!?]/g, '').replace(/\s+/g, ' ');
+          const cleanAns = q.answer.toLowerCase().replace(/[.,!?]/g, '').replace(/\s+/g, ' ');
+          if (cleanVal && cleanVal === cleanAns) {
+            if (input) input.classList.add("correct");
+            correct++;
+          } else {
+            if (input) {
+              input.classList.add("wrong");
+              if (!val) input.placeholder = `Chưa làm (${q.answer})`;
+              else input.value = `${input.value} (Sai, đáp án: ${q.answer})`;
+            }
+          }
+        });
+      }
+
+      if (ex.review) {
+        const revBox = document.getElementById("eng-review");
+        ex.review.forEach((q, qi) => {
+          total++;
+          const input = revBox ? revBox.querySelector(`.review-input[data-qi="${qi}"]`) : null;
+          const val = input ? input.value.trim().toLowerCase() : "";
+          if (val && val === q.answer.toLowerCase()) {
+            if (input) input.classList.add("correct");
+            correct++;
+          } else {
+            if (input) {
+              input.classList.add("wrong");
+              if (!val) input.placeholder = `Chưa làm (${q.answer})`;
+            }
+          }
+        });
+      }
+
+      const resBox = document.getElementById("eng-result");
+      resBox.style.display = "block";
+      resBox.innerHTML = `Bạn đạt <b>${correct}/${total}</b> điểm! 🎉`;
+
+      if (correct >= 25 && !completedDays.includes(dayId)) {
+        completedDays.push(dayId);
+        localStorage.setItem(KEY_DAYS, JSON.stringify(completedDays));
+        localStorage.setItem(KEY_STREAK, (streak + 1).toString());
+      }
+
+      const scoreStr = `${correct}/${total} câu`;
+      triggerAutoSync(`Nộp bài ${lessonData.title}`, scoreStr, lessonData.title);
+    });
+
+    function triggerAutoSync(exitReason, quizScore, quizTitle) {
+      const name = localStorage.getItem('eng:student-name') || 'Học sinh chưa nhập tên';
+      const completedDays = JSON.parse(localStorage.getItem(KEY_DAYS) || '[]');
+      const streak = localStorage.getItem(KEY_STREAK) || '1';
+      const now = new Date().toLocaleString('vi-VN');
+
+      const payload = {
+        name,
+        lessonTitle: quizTitle || lessonData.title || "Bài 1",
+        score: quizScore || `Đã pass ${completedDays.length}/5 bài`,
+        completedCount: completedDays.length,
+        completedDays,
+        streak,
+        timestamp: now,
+        reason: exitReason || 'App Exit / Hide'
+      };
+
+      localStorage.setItem('eng:last-sync-snapshot', JSON.stringify(payload));
+      localStorage.setItem('eng:last-sync-time', now);
+
+      const DEFAULT_SYNC_URL = 'https://script.google.com/macros/s/AKfycbzVXmeXIu4Tf36Tjs9WiRyvtEB3WTxhSoReXyhqySDnze8aVaFTFW39em2cdfdzlWOR/exec';
+      const syncUrl = localStorage.getItem('eng:sync-server-url') || DEFAULT_SYNC_URL;
+      if (syncUrl) {
+        fetch(syncUrl, {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          mode: 'no-cors'
+        }).catch(() => {});
+      }
+    }
+  }
+
+  render();
+})();

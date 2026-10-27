@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Grade 8 - Session 3: Future Simple vs. Near Future (Full Formulas)</title>
+</head>
+<body>
+<div id="eng-app"></div>
+<style>
+  #eng-app {
+    --bg: #fbf6ee;
+    --card: #fffaf2;
+    --ink: #4a3b30;
+    --ink-soft: #8a7a6a;
+    --accent: #d97a52;
+    --accent-soft: #f1c6a8;
+    --good: #7a9a6e;
+    --good-bg: rgba(122,154,110,0.12);
+    --bad: #c4654f;
+    --bad-bg: rgba(196,101,79,0.1);
+    --tip: #c79a3a;
+    --tip-bg: rgba(199,154,58,0.12);
+    --border: rgba(74,59,48,0.12);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: linear-gradient(160deg, #fdf2e3 0%, #fbf6ee 60%, #f7ecdd 100%);
+    border-radius: 20px;
+    padding: 28px;
+    max-width: 800px;
+    margin: 20px auto;
+    box-sizing: border-box;
+  }
+  #eng-app * { box-sizing: border-box; }
+  .eng-header { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:20px; flex-wrap: wrap; }
+  .eng-title { font-size: 22px; font-weight: 700; margin: 0 0 4px; }
+  .eng-sub { color: var(--ink-soft); font-size: 14px; margin: 0; }
+  .eng-badge {
+    background: rgba(255,255,255,0.55); backdrop-filter: blur(8px);
+    border: 1px solid var(--border); border-radius: 14px;
+    padding: 10px 14px; font-size: 13px; text-align: right; min-width: 130px;
+  }
+  .eng-badge b { font-size: 18px; display:block; color: var(--accent); }
+  .eng-card {
+    background: rgba(255,255,255,0.65); backdrop-filter: blur(10px);
+    border: 1px solid var(--border); border-radius: 16px;
+    padding: 22px 24px; margin-bottom: 20px;
+    box-shadow: 0 4px 18px rgba(74,59,48,0.06);
+  }
+  .eng-section-title { font-size: 16px; font-weight: 700; margin: 0 0 14px; display:flex; align-items:center; gap:8px; color: var(--accent); }
+  .eng-section-sub { font-size: 12px; color: var(--ink-soft); margin: -6px 0 14px; }
+
+  .eng-flash-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+  .eng-flash {
+    position: relative; background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 10px; text-align: center; cursor: pointer;
+    min-height: 95px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transition: transform 0.15s ease, border-color 0.15s ease; user-select: none;
+  }
+  .eng-flash:hover { transform: translateY(-2px); border-color: var(--accent-soft); }
+  .eng-flash .front { font-weight: 700; font-size: 14px; }
+  .eng-pos { font-size: 11px; color: var(--accent); font-weight: 600; font-style: italic; margin-left: 4px; }
+  .eng-flash .ipa { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+  .eng-flash .back { display:none; font-size: 12px; color: var(--ink-soft); margin-top:4px; }
+  .eng-flash.flipped .front { color: var(--accent); }
+  .eng-flash.flipped .back { display:block; }
+  .eng-example { font-size: 11px; color: var(--ink-soft); font-style: italic; margin-top: 4px; display:none; text-align:center; }
+  .eng-flash.flipped .eng-example { display:block; }
+  .eng-speak {
+    position:absolute; top:6px; right:6px; width:22px; height:22px; border-radius:50%;
+    border: none; background: rgba(217,122,82,0.12); color: var(--accent);
+    font-size: 12px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .eng-speak:hover { background: rgba(217,122,82,0.22); }
+
+  .eng-formula-box {
+    background: rgba(255,255,255,0.7);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 10px 0 16px;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .eng-formula-title { font-weight: 700; color: var(--accent); font-size: 14px; margin-bottom: 6px; }
+
+  .eng-grammar-ex { background: rgba(217,122,82,0.08); border-radius: 10px; padding: 12px 14px; margin-top: 10px; font-size: 13px; line-height:1.7; }
+  .eng-mistake { display:flex; gap:14px; flex-wrap:wrap; margin-top:14px; }
+  .eng-mistake-box { flex:1; min-width:220px; border-radius: 10px; padding: 12px 14px; font-size: 13px; }
+  .eng-mistake-box.wrong { background: var(--bad-bg); }
+  .eng-mistake-box.right { background: var(--good-bg); }
+  .eng-mistake-box b { display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px; }
+  .eng-mistake-box.wrong b { color: var(--bad); }
+  .eng-mistake-box.right b { color: var(--good); }
+  .eng-tip-box { margin-top: 12px; background: var(--tip-bg); border-radius: 10px; padding: 12px 14px; font-size: 13px; display:flex; gap:8px; line-height:1.6; }
+
+  .eng-dialogue-line { display:flex; gap:10px; margin-bottom: 14px; align-items:flex-start; }
+  .eng-dialogue-avatar {
+    width: 32px; height: 32px; border-radius: 50%; background: var(--accent-soft); color: var(--ink);
+    display:flex; align-items:center; justify-content:center; font-size: 13px; font-weight:700; flex-shrink:0;
+  }
+  .eng-dialogue-bubble { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 10px 14px; flex:1; }
+  .eng-dialogue-en { font-size: 14px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .eng-dialogue-vi { font-size: 12px; color: var(--ink-soft); margin-top: 4px; display:none; }
+  .eng-dialogue-vi.show { display:block; }
+  .eng-toggle-vi { background:none; border:none; color: var(--accent); font-size:13px; cursor:pointer; text-decoration:underline; padding:0; margin-top:8px; font-weight:600; }
+
+  .eng-ex-block { margin-bottom: 24px; }
+  .eng-ex-block:last-child { margin-bottom: 0; }
+  .eng-quiz-q { margin-bottom: 16px; }
+  .eng-quiz-q p { font-weight: 600; margin: 0 0 8px; font-size: 14px; }
+  .eng-opt {
+    display:block; width:100%; text-align:left; background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 14px; margin-bottom: 6px; cursor:pointer; font-size: 14px; color: var(--ink);
+  }
+  .eng-opt:hover { border-color: var(--accent-soft); }
+  .eng-opt.selected { border-color: var(--accent); background: rgba(217,122,82,0.1); }
+  .eng-opt.correct { border-color: var(--good); background: var(--good-bg); }
+  .eng-opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
+
+  .eng-fill-input {
+    border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; font-size: 14px;
+    width: 160px; background: var(--card); color: var(--ink); font-family: inherit;
+  }
+  .eng-fill-input.correct { border-color: var(--good); background: var(--good-bg); }
+  .eng-fill-input.wrong { border-color: var(--bad); background: var(--bad-bg); }
+  .eng-fill-hint { font-size: 11px; color: var(--ink-soft); margin-top: 4px; }
+
+  .eng-build-pool, .eng-build-answer {
+    display:flex; flex-wrap:wrap; gap:8px; min-height: 44px; padding: 8px;
+    border-radius: 10px; border: 1px dashed var(--border);
+  }
+  .eng-build-answer { background: rgba(255,255,255,0.4); margin-bottom: 8px; }
+  .eng-build-word {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 6px 12px; font-size: 14px; cursor: pointer; user-select:none;
+  }
+  .eng-build-word:hover { border-color: var(--accent-soft); }
+  .eng-build-word.used { opacity: 0.35; cursor: default; }
+  .eng-build-result { font-size: 12px; margin-top: 6px; font-weight:600; }
+  .eng-build-result.correct { color: var(--good); }
+  .eng-build-result.wrong { color: var(--bad); }
+
+  .eng-btn {
+    background: var(--accent); color: white; border: none; border-radius: 12px;
+    padding: 12px 24px; font-size: 14px; font-weight: 700; cursor: pointer;
+  }
+  .eng-btn:hover { opacity: 0.92; }
+  .eng-btn.ghost { background: rgba(217,122,82,0.12); color: var(--accent); }
+  .eng-result { margin-top: 14px; padding: 14px; border-radius: 12px; background: var(--good-bg); font-size: 14px; display:none; font-weight:600; }
+
+  .eng-nav {
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    margin-top: 16px; flex-wrap: wrap;
+  }
+  .eng-nav-link {
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+    min-width: 120px; border-radius: 12px; padding: 10px 18px;
+    background: rgba(217,122,82,0.12); color: var(--accent); text-decoration:none;
+    font-size: 13px; font-weight: 700; border: 1px solid rgba(217,122,82,0.18);
+  }
+  .eng-nav-link:hover { background: rgba(217,122,82,0.2); }
+  .eng-nav-link.primary { background: var(--accent); color: #fff; }
+</style>
+
+<script>
+(function(){
+  const lessonData = {
+    course: "g8",
+    session: 3,
+    title: "Tương lai đơn vs. Tương lai gần (Công thức đầy đủ)",
+    titleEn: "Future Simple (Will) vs. Near Future (Be going to) - Full Formulas",
+
+    vocab: [
+      { en: "single-use plastic", pos: "n phr", ipa: "/ˈsɪŋɡl juːs ˈplæstɪk/", vi: "nhựa dùng một lần", example: "We should ban single-use plastic." },
+      { en: "recycle", pos: "v", ipa: "/ˌriːˈsaɪkl/", vi: "tái chế", example: "We recycle plastic bottles into toys." },
+      { en: "carbon footprint", pos: "n phr", ipa: "/ˈkɑːrbən ˈfʊtprɪnt/", vi: "vết carbon / khí thải", example: "Riding a bicycle reduces your carbon footprint." },
+      { en: "artificial intelligence", pos: "n phr", ipa: "/ˌɑːrtɪˈfɪʃl ɪnˈtelɪdʒəns/", vi: "trí tuệ nhân tạo (AI)", example: "AI will revolutionize education." },
+      { en: "robotics", pos: "n", ipa: "/roʊˈbɑːtɪks/", vi: "khoa học robot", example: "My dream is to invent robotics devices." },
+      { en: "device", pos: "n", ipa: "/dɪˈvaɪs/", vi: "thiết bị thông minh", example: "Smart devices assist us in daily tasks." },
+      { en: "spontaneous decision", pos: "n phr", ipa: "/spɑːnˈteɪniəs dɪˈsɪʒn/", vi: "quyết định bộc phát", example: "Will is used for spontaneous decisions." },
+      { en: "evidence", pos: "n", ipa: "/ˈevɪdəns/", vi: "bằng chứng trực quan", example: "Be going to is used when there is clear evidence." }
+    ],
+
+    grammar: {
+      point: "CÔNG THỨC ĐẦY ĐỦ 100% CỦA TƯƠNG LAI ĐƠN & TƯƠNG LAI GẦN",
+      explanation: `
+        <div class="eng-formula-box">
+          <div class="eng-formula-title">📌 1. THÌ TƯƠNG LAI ĐƠN (Future Simple with WILL)</div>
+          <b>• Khẳng định (+)</b>: <code>S + will + V(bare)</code> (<i>'ll = will</i>)<br/>
+          <b>• Phủ định (-)</b>: <code>S + will + NOT + V(bare)</code> (<i>won't + V_nguyên_thể</i>)<br/>
+          <b>• Nghi vấn Yes/No (?)</b>: <code>Will + S + V(bare)?</code> ➔ <i>Yes, S + will. / No, S + won't.</i><br/>
+          <b>• Câu hỏi Wh- (?)</b>: <code>Wh- + will + S + V(bare)?</code> (<i>Where will you go tomorrow?</i>)<br/>
+          <b>• Cách dùng</b>: <br/>
+          &nbsp;&nbsp;1. Quyết định bộc phát nảy ra ngay lúc nói.<br/>
+          &nbsp;&nbsp;2. Dự đoán cảm tính (đi kèm <i>I think, I believe, I hope, perhaps, probably</i>).<br/>
+          &nbsp;&nbsp;3. Lời hứa (<i>I promise...</i>), lời đề nghị (<i>I will help you</i>).
+        </div>
+
+        <div class="eng-formula-box">
+          <div class="eng-formula-title">📌 2. THÌ TƯƠNG LAI GẦN (Near Future with BE GOING TO)</div>
+          <b>• Khẳng định (+)</b>: <code>S + am / is / are + GOING TO + V(bare)</code><br/>
+          <b>• Phủ định (-)</b>: <code>S + am / is / are + NOT + GOING TO + V(bare)</code> (<i>isn't / aren't going to</i>)<br/>
+          <b>• Nghi vấn Yes/No (?)</b>: <code>Am / Is / Are + S + GOING TO + V(bare)?</code> ➔ <i>Yes, S + am/is/are. / No, S + am/is/are + not.</i><br/>
+          <b>• Câu hỏi Wh- (?)</b>: <code>Wh- + am / is / are + S + GOING TO + V(bare)?</code><br/>
+          <b>• Cách dùng</b>: <br/>
+          &nbsp;&nbsp;1. Kế hoạch / dự định đã chuẩn bị từ trước lúc nói.<br/>
+          &nbsp;&nbsp;2. Dự đoán CÓ BẰNG CHỨNG rõ ràng ở hiện tại (ví dụ mây đen ➔ sắp mưa).
+        </div>
+      `,
+      examples: [
+        "<b>Quyết định bộc phát (Will):</b> The phone is ringing. I <b>will answer</b> it!",
+        "<b>Bằng chứng rõ (Be going to):</b> Look at those dark clouds! It <b>is going to rain</b> soon."
+      ],
+      commonMistake: {
+        wrong: "I decided yesterday. I will buy a new smartphone.",
+        right: "I decided yesterday. I **am going to buy** a new smartphone.",
+        note: "Đã có dự định từ trước ('decided yesterday') ➔ Phải dùng 'be going to buy', KHÔNG dùng 'will buy'."
+      },
+      memoryTip: "Mẹo thi Lớp 8: Có 'I think/I promise' ➔ Dùng WILL. Có 'look at/already planned' ➔ Dùng BE GOING TO!"
+    },
+
+    dialogue: {
+      titleVi: "Tình huống: Lên kế hoạch dự án môi trường & dự đoán tương lai công nghệ",
+      lines: [
+        { speaker: "Phong", en: "What are you going to do this weekend, An?", vi: "Cuối tuần này bạn định làm gì thế An?" },
+        { speaker: "An", en: "Our club is going to collect single-use plastic waste near the lake.", vi: "CLB của tụi mình dự định sẽ thu gom rác nhựa dùng 1 lần gần hồ." },
+        { speaker: "Phong", en: "That sounds meaningful! Will you need more volunteers?", vi: "Nghe ý nghĩa quá! Mọi người có cần thêm tình nguyện viên không?" },
+        { speaker: "An", en: "Yes, we will! If you are free, please join us.", vi: "Có chứ! Nếu bạn rảnh thì cùng tham gia nhé." },
+        { speaker: "Phong", en: "Great! I promise I will bring extra trash bags for everyone.", vi: "Tuyệt! Mình hứa mình sẽ mang thêm túi đựng rác cho mọi người." },
+        { speaker: "An", en: "Thanks! I believe robotics will replace manual sorting in the future.", vi: "Cảm ơn nhé! Mình tin là công nghệ robot sẽ thay thế việc phân loại rác bằng tay trong tương lai." }
+      ]
+    },
+
+    exercises: {
+      multipleChoice: [
+        { q: "Look at that car! It ___ into the wall!", options: ["will crash", "is going to crash", "crashes"], answer: "is going to crash" },
+        { q: "I promise I ___ you with your robotics project.", options: ["will help", "am going to help", "helped"], answer: "will help" },
+        { q: "They have already bought seeds. They ___ trees tomorrow.", options: ["will plant", "are going to plant", "planted"], answer: "are going to plant" },
+        { q: "I think people ___ on Mars in 2080.", options: ["will live", "are going to live", "lived"], answer: "will live" },
+        { q: "A: I'm cold! B: I ___ close the window for you.", options: ["am going to", "will", "am"], answer: "will" },
+        { q: "She has already booked the tickets. She ___ fly to Da Nang next Sunday.", options: ["will", "is going to", "was going to"], answer: "is going to" },
+        { q: "Don't worry. I ___ forget your birthday!", options: ["am not going to", "won't", "will"], answer: "won't" },
+        { q: "___ you come to my party next Saturday?", options: ["Will", "Are going to", "Do"], answer: "Will" },
+        { q: "Look at those dark clouds! It ___ rain.", options: ["will", "is going to", "rains"], answer: "is going to" },
+        { q: "We have decided to recycle. We ___ use plastic bags anymore.", options: ["will not", "are not going to", "is not going to"], answer: "are not going to" }
+      ],
+      fillBlank: [
+        { sentence: "A: Oh, I forgot my wallet! B: Don't worry, I ___ (pay) for your coffee.", answer: "will pay", hint: "bộc phát (will)" },
+        { sentence: "We have saved money for months. We ___ (buy) a smart device.", answer: "are going to buy", hint: "kế hoạch có sẵn (be going to)" },
+        { sentence: "Listen! I promise I ___ (not / tell) anyone your secret.", answer: "will not tell", hint: "lời hứa (will not / won't)" },
+        { sentence: "They ___ (not / attend) the event. They've already cancelled.", answer: "are not going to attend", hint: "kế hoạch đã huỷ (be going to)" },
+        { sentence: "I think electric vehicles ___ (replace) petrol cars in the future.", answer: "will replace", hint: "dự đoán cá nhân (will)" },
+        { sentence: "She has registered for the club. She ___ (join) it next week.", answer: "is going to join", hint: "kế hoạch có sẵn" },
+        { sentence: "A: The printer is broken! B: I ___ (call) the technician right now.", answer: "will call", hint: "quyết định ngay lúc nói (will)" },
+        { sentence: "___ robots ___ (do) all factory jobs in 50 years?", answer: "Will do", hint: "câu hỏi tương lai đơn" }
+      ],
+      
+      transformation: [
+        { sentence: "I plan to visit Hue next month. (going)", hint: "Sử dụng be going to", answer: "I am going to visit Hue next month." },
+        { sentence: "Perhaps it will rain tomorrow. (think)", hint: "Sử dụng I think", answer: "I think it will rain tomorrow." },
+        { sentence: "We have decided to buy a new computer. (going)", hint: "Quyết định có sẵn", answer: "We are going to buy a new computer." },
+        { sentence: "I promise not to be late again. (won't)", hint: "Sử dụng will not", answer: "I won't be late again." },
+        { sentence: "Look at those black clouds! A storm is coming. (going)", hint: "Dự đoán có căn cứ", answer: "Look at those black clouds! It is going to storm." }
+      ],
+      review: [
+        { sentence: "While I ___ (walk) home, I saw an accident.", answer: "was walking", hint: "Quá khứ tiếp diễn" },
+        { sentence: "The electricity went off while she ___ (cook).", answer: "was cooking", hint: "Quá khứ tiếp diễn" },
+        { sentence: "He ___ (break) his leg while he was playing soccer.", answer: "broke", hint: "Quá khứ đơn xen vào" },
+        { sentence: "What ___ you ___ (do) when the earthquake happened?", answer: "were doing", hint: "Câu hỏi quá khứ tiếp diễn" },
+        { sentence: "They ___ (not / hear) the bell because they were sleeping.", answer: "did not hear", hint: "Phủ định quá khứ đơn" }
+      ],
+      sentenceBuild: [
+        { words: ["I", "promise", "I", "will", "study", "harder", "."], answer: "I promise I will study harder ." },
+        { words: ["They", "are", "going", "to", "recycle", "plastics", "."], answer: "They are going to recycle plastics ." },
+        { words: ["I", "think", "robots", "will", "replace", "humans", "someday", "."], answer: "I think robots will replace humans someday ." },
+        { words: ["She", "is", "going", "to", "join", "the", "science", "club", "."], answer: "She is going to join the science club ." },
+        { words: ["Will", "you", "help", "me", "with", "this", "project", "?"], answer: "Will you help me with this project ?" },
+        { words: ["We", "will", "not", "use", "plastic", "bags", "anymore", "."], answer: "We will not use plastic bags anymore ." },
+        { words: ["Look", "!", "It", "is", "going", "to", "rain", "."], answer: "Look ! It is going to rain ." }
+      ]
+    }
+  };
+
+  const KEY_STREAK = "eng:streak";
+  const KEY_DAYS = "eng:completed-days";
+  const dayId = `g8-s${lessonData.session}`;
+  const ttsOk = typeof window.speechSynthesis !== "undefined";
+
+  function speak(text) {
+    if (!ttsOk) return;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "en-US";
+      u.rate = 0.92;
+      window.speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
+  const app = document.getElementById("eng-app");
+
+  function speakBtn(text) {
+    return ttsOk ? `<button class="eng-speak" data-speak="${text.replace(/"/g, '&quot;')}" title="Nghe đọc">🔊</button>` : "";
+  }
+
+  function flashHtml(v, i) {
+    return `<div class="eng-flash" data-i="${i}">
+      ${speakBtn(v.en)}
+      <div class="front">${v.en} ${v.pos ? `<span class="eng-pos">(${v.pos})</span>` : ""}</div>
+      ${v.ipa ? `<div class="ipa">${v.ipa}</div>` : ""}
+      <div class="back">${v.vi}</div>
+      <div class="eng-example">"${v.example}"</div>
+    </div>`;
+  }
+
+  function dialogueHtml(d) {
+    return d.lines.map((line, i) => `
+      <div class="eng-dialogue-line">
+        <div class="eng-dialogue-avatar">${line.speaker}</div>
+        <div class="eng-dialogue-bubble">
+          <div class="eng-dialogue-en">${line.en} ${speakBtn(line.en)}</div>
+          <div class="eng-dialogue-vi" data-vi="${i}">${line.vi}</div>
+        </div>
+      </div>`).join("") + `<button class="eng-toggle-vi" id="eng-toggle-vi">Hiện nghĩa tiếng Việt</button>`;
+  }
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function normalize(s) {
+    return s.toLowerCase().replace(/[.?!,]/g, "").trim().replace(/\s+/g, " ");
+  }
+
+  function navHtml() {
+    const s = lessonData.session;
+    const prevHref = `english-g8-s${s-1}.html`;
+    const nextHref = `english-g8-s${s+1}.html`;
+
+    return `<div class="eng-nav">
+      <a class="eng-nav-link" href="${prevHref}">← Bài trước</a>
+      <a class="eng-nav-link" href="index.html">Trang chủ</a>
+      <a class="eng-nav-link primary" href="${nextHref}">Bài tiếp →</a>
+    </div>`;
+  }
+
+  function render() {
+    const streak = parseInt(localStorage.getItem(KEY_STREAK) || "1");
+    const completedDays = JSON.parse(localStorage.getItem(KEY_DAYS) || "[]");
+    const completedCount = completedDays.length;
+
+    const ex = lessonData.exercises;
+
+    app.innerHTML = `
+      <div class="eng-header">
+        <div>
+          <p class="eng-title">Grade 8 · Bài ${lessonData.session}: ${lessonData.title}</p>
+          <p class="eng-sub">${lessonData.titleEn}</p>
+        </div>
+        <div class="eng-badge">Streak<b>${streak} 🔥</b>Đã học ${completedCount} bài</div>
+      </div>
+
+      <div class="eng-card">
+        <p class="eng-section-title">📇 Từ vựng trọng tâm (bấm để lật, bấm 🔊 để nghe)</p>
+        <div class="eng-flash-grid">${lessonData.vocab.map(flashHtml).join("")}</div>
+      </div>
+
+      <div class="eng-card">
+        <p class="eng-section-title">📘 Ngữ pháp: ${lessonData.grammar.point}</p>
+        <div>${lessonData.grammar.explanation}</div>
+        <div class="eng-grammar-ex">${lessonData.grammar.examples.join("<br/>")}</div>
+        ${lessonData.grammar.commonMistake ? `
+        <div class="eng-mistake">
+          <div class="eng-mistake-box wrong"><b>❌ Sai thường gặp</b>${lessonData.grammar.commonMistake.wrong}</div>
+          <div class="eng-mistake-box right"><b>✅ Đúng</b>${lessonData.grammar.commonMistake.right}</div>
+        </div>
+        <p class="eng-section-sub" style="margin-top:8px;">${lessonData.grammar.commonMistake.note}</p>` : ""}
+        ${lessonData.grammar.memoryTip ? `<div class="eng-tip-box">💡 ${lessonData.grammar.memoryTip}</div>` : ""}
+      </div>
+
+      ${lessonData.dialogue ? `
+      <div class="eng-card">
+        <p class="eng-section-title">💬 Hội thoại thực tế mở rộng</p>
+        <p class="eng-section-sub">${lessonData.dialogue.titleVi}</p>
+        ${dialogueHtml(lessonData.dialogue)}
+      </div>` : ""}
+
+      <div class="eng-card">
+        <p class="eng-section-title">✏️ Bài tập luyện tập chuyên sâu</p>
+
+        ${ex.multipleChoice && ex.multipleChoice.length ? `
+        <div class="eng-ex-block">
+          <p class="eng-section-sub">Phần 1 · Trắc nghiệm ngữ pháp & từ vựng (10 câu)</p>
+          <div id="eng-mc"></div>
+        </div>` : ""}
+
+        ${ex.fillBlank && ex.fillBlank.length ? `
+        <div class="eng-ex-block">
+          <p class="eng-section-sub">Phần 2 · Chia động từ đúng theo công thức (8 câu)</p>
+          <div id="eng-fill"></div>
+        </div>` : ""}
+
+        ${ex.sentenceBuild && ex.sentenceBuild.length ? `
+        <div class="eng-ex-block">
+          <p class="eng-section-sub">Phần 3 · Ghép câu hoàn chỉnh theo cấu trúc (7 câu)</p>
+          <div id="eng-build"></div>
+        </div>` : ""}
+
+        ${ex.transformation && ex.transformation.length ? `
+        <div class="eng-ex-block">
+          <p class="eng-section-sub">Phần 4 · Viết lại câu (Sentence Transformation)</p>
+          <div id="eng-transform"></div>
+        </div>` : ""}
+
+        ${ex.review && ex.review.length ? `
+        <div class="eng-ex-block" style="background: rgba(217,122,82,0.05); border-color: rgba(217,122,82,0.2);">
+          <p class="eng-section-sub" style="color: #c56842;">Phần 5 · Ôn tập bài cũ (Spaced Repetition)</p>
+          <div id="eng-review"></div>
+        </div>` : ""}
+
+
+        <button class="eng-btn" id="eng-submit">Kiểm tra kết quả 25 câu</button>
+        <div class="eng-result" id="eng-result"></div>
+      </div>
+
+      ${navHtml()}
+    `;
+
+    // event listeners
+    app.querySelectorAll("[data-speak]").forEach(btn => {
+      btn.addEventListener("click", (e) => { e.stopPropagation(); speak(btn.dataset.speak); });
+    });
+
+    app.querySelectorAll(".eng-flash").forEach(el => {
+      el.addEventListener("click", (e) => {
+        if (e.target.closest(".eng-speak")) return;
+        el.classList.toggle("flipped");
+      });
+    });
+
+    const toggleBtn = document.getElementById("eng-toggle-vi");
+    if (toggleBtn) {
+      let shown = false;
+      toggleBtn.addEventListener("click", () => {
+        shown = !shown;
+        app.querySelectorAll(".eng-dialogue-vi").forEach(el => el.classList.toggle("show", shown));
+        toggleBtn.textContent = shown ? "Ẩn nghĩa tiếng Việt" : "Hiện nghĩa tiếng Việt";
+      });
+    }
+
+    // Multiple Choice
+    const mcSelections = {};
+    const mcBox = document.getElementById("eng-mc");
+    if (mcBox) {
+      ex.multipleChoice.forEach((q, qi) => {
+        const block = document.createElement("div");
+        block.className = "eng-quiz-q";
+        block.innerHTML = `<p>${qi + 1}. ${q.q}</p>` +
+          q.options.map(opt => `<button class="eng-opt" data-qi="${qi}" data-opt="${opt}">${opt}</button>`).join("");
+        mcBox.appendChild(block);
+      });
+      mcBox.querySelectorAll(".eng-opt").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const qi = btn.dataset.qi;
+          mcBox.querySelectorAll(`.eng-opt[data-qi="${qi}"]`).forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          mcSelections[qi] = btn.dataset.opt;
+        });
+      });
+    }
+
+    // Fill Blank
+    const fillBox = document.getElementById("eng-fill");
+    if (fillBox) {
+      ex.fillBlank.forEach((q, qi) => {
+        const parts = q.sentence.split("___");
+        const block = document.createElement("div");
+        block.className = "eng-quiz-q";
+        block.innerHTML = `<p>${qi + 1}. ${parts[0]}<input class="eng-fill-input" data-qi="${qi}" type="text"/>${parts[1] || ""}</p>`;
+        fillBox.appendChild(block);
+      });
+    }
+
+    // Sentence Build
+    const buildBox = document.getElementById("eng-build");
+    const buildState = {};
+    if (buildBox) {
+      ex.sentenceBuild.forEach((q, qi) => {
+        const wrap = document.createElement("div");
+        wrap.className = "eng-quiz-q";
+        wrap.innerHTML = `<p>${qi + 1}. Ghép từ thành câu:</p>
+          <div class="eng-build-answer" id="eng-build-ans-${qi}"></div>
+          <div class="eng-build-pool" id="eng-build-pool-${qi}"></div>
+          <button class="eng-btn ghost" data-reset="${qi}" style="margin-top:6px; padding:6px 14px; font-size:12px;">Làm lại</button>
+          <div class="eng-build-result" id="eng-build-result-${qi}"></div>`;
+        buildBox.appendChild(wrap);
+        buildState[qi] = { order: shuffle(q.words.map((w, wi) => ({ w, wi }))), used: new Set(), chosen: [] };
+        renderBuildPool(qi);
+      });
+
+      function renderBuildPool(qi) {
+        const pool = document.getElementById(`eng-build-pool-${qi}`);
+        const ans = document.getElementById(`eng-build-ans-${qi}`);
+        const st = buildState[qi];
+        pool.innerHTML = st.order.map(item => `
+          <button class="eng-build-word ${st.used.has(item.wi) ? 'used' : ''}" data-qi="${qi}" data-wi="${item.wi}">${item.w}</button>
+        `).join("");
+        ans.innerHTML = st.chosen.map(item => `
+          <span class="eng-build-word">${item.w}</span>
+        `).join("");
+
+        pool.querySelectorAll(".eng-build-word:not(.used)").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const wi = parseInt(btn.dataset.wi);
+            const item = st.order.find(x => x.wi === wi);
+            st.used.add(wi);
+            st.chosen.push(item);
+            renderBuildPool(qi);
+          });
+        });
+      }
+
+      buildBox.querySelectorAll("[data-reset]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const qi = btn.dataset.reset;
+          buildState[qi].used.clear();
+          buildState[qi].chosen = [];
+          document.getElementById(`eng-build-result-${qi}`).textContent = "";
+          renderBuildPool(qi);
+        });
+      });
+    }
+
+    // Submit
+    document.getElementById("eng-submit").addEventListener("click", () => {
+      let correct = 0;
+      let total = 0;
+
+      if (ex.multipleChoice) {
+        ex.multipleChoice.forEach((q, qi) => {
+          total++;
+          const selected = mcSelections[qi];
+          const btns = mcBox.querySelectorAll(`.eng-opt[data-qi="${qi}"]`);
+          btns.forEach(b => {
+            if (selected) {
+              if (b.dataset.opt === q.answer) b.classList.add("correct");
+              if (b.dataset.opt === selected && selected !== q.answer) b.classList.add("wrong");
+            }
+          });
+          if (selected && selected === q.answer) {
+            correct++;
+          }
+        });
+      }
+
+      if (ex.fillBlank) {
+        ex.fillBlank.forEach((q, qi) => {
+          total++;
+          const input = fillBox ? fillBox.querySelector(`.eng-fill-input[data-qi="${qi}"]`) : null;
+          const val = input ? input.value.trim().toLowerCase() : "";
+          if (val && val === q.answer.toLowerCase()) {
+            input.classList.add("correct");
+            correct++;
+          } else {
+            if (input) {
+              input.classList.add("wrong");
+              if (!val) input.placeholder = `Chưa làm (${q.answer})`;
+            }
+          }
+        });
+      }
+
+      if (ex.sentenceBuild) {
+        ex.sentenceBuild.forEach((q, qi) => {
+          total++;
+          const st = buildState[qi];
+          const userSentence = st && st.chosen ? st.chosen.map(x => x.w).join(" ") : "";
+          const resEl = document.getElementById(`eng-build-result-${qi}`);
+          if (userSentence && normalize(userSentence) === normalize(q.answer)) {
+            if (resEl) {
+              resEl.className = "eng-build-result correct";
+              resEl.textContent = "✅ Chính xác!";
+            }
+            correct++;
+          } else {
+            if (resEl) {
+              resEl.className = "eng-build-result wrong";
+              resEl.textContent = !userSentence ? `❌ Chưa làm. Đáp án: "${q.answer}"` : `❌ Chưa đúng. Đáp án: "${q.answer}"`;
+            }
+          }
+        });
+      }
+
+      
+      if (ex.transformation) {
+        const transBox = document.getElementById("eng-transform");
+        ex.transformation.forEach((q, qi) => {
+          total++;
+          const input = transBox ? transBox.querySelector(`.trans-input[data-qi="${qi}"]`) : null;
+          const val = input ? input.value.trim().toLowerCase() : "";
+          const cleanVal = val.replace(/[.,!?]/g, '').replace(/\s+/g, ' ');
+          const cleanAns = q.answer.toLowerCase().replace(/[.,!?]/g, '').replace(/\s+/g, ' ');
+          if (cleanVal && cleanVal === cleanAns) {
+            if (input) input.classList.add("correct");
+            correct++;
+          } else {
+            if (input) {
+              input.classList.add("wrong");
+              if (!val) input.placeholder = `Chưa làm (${q.answer})`;
+              else input.value = `${input.value} (Sai, đáp án: ${q.answer})`;
+            }
+          }
+        });
+      }
+
+      if (ex.review) {
+        const revBox = document.getElementById("eng-review");
+        ex.review.forEach((q, qi) => {
+          total++;
+          const input = revBox ? revBox.querySelector(`.review-input[data-qi="${qi}"]`) : null;
+          const val = input ? input.value.trim().toLowerCase() : "";
+          if (val && val === q.answer.toLowerCase()) {
+            if (input) input.classList.add("correct");
+            correct++;
+          } else {
+            if (input) {
+              input.classList.add("wrong");
+              if (!val) input.placeholder = `Chưa làm (${q.answer})`;
+            }
+          }
+        });
+      }
+
+      const resBox = document.getElementById("eng-result");
+      resBox.style.display = "block";
+      resBox.innerHTML = `Bạn đạt <b>${correct}/${total}</b> điểm! 🎉`;
+
+      if (correct >= 25 && !completedDays.includes(dayId)) {
+        completedDays.push(dayId);
+        localStorage.setItem(KEY_DAYS, JSON.stringify(completedDays));
+        localStorage.setItem(KEY_STREAK, (streak + 1).toString());
+      }
+
+      const scoreStr = `${correct}/${total} câu`;
+      triggerAutoSync(`Nộp bài ${lessonData.title}`, scoreStr, lessonData.title);
+    });
+
+    function triggerAutoSync(exitReason, quizScore, quizTitle) {
+      const name = localStorage.getItem('eng:student-name') || 'Học sinh chưa nhập tên';
+      const completedDays = JSON.parse(localStorage.getItem(KEY_DAYS) || '[]');
+      const streak = localStorage.getItem(KEY_STREAK) || '1';
+      const now = new Date().toLocaleString('vi-VN');
+
+      const payload = {
+        name,
+        lessonTitle: quizTitle || lessonData.title || "Bài 3",
+        score: quizScore || `Đã pass ${completedDays.length}/5 bài`,
+        completedCount: completedDays.length,
+        completedDays,
+        streak,
+        timestamp: now,
+        reason: exitReason || 'App Exit / Hide'
+      };
+
+      localStorage.setItem('eng:last-sync-snapshot', JSON.stringify(payload));
+      localStorage.setItem('eng:last-sync-time', now);
+
+      const DEFAULT_SYNC_URL = 'https://script.google.com/macros/s/AKfycbzVXmeXIu4Tf36Tjs9WiRyvtEB3WTxhSoReXyhqySDnze8aVaFTFW39em2cdfdzlWOR/exec';
+      const syncUrl = localStorage.getItem('eng:sync-server-url') || DEFAULT_SYNC_URL;
+      if (syncUrl) {
+        fetch(syncUrl, {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          mode: 'no-cors'
+        }).catch(() => {});
+      }
+    }
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

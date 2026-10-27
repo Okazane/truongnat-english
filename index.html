@@ -3,7 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>English Daily Coach - Lộ trình 21 ngày</title>
+  <meta name="theme-color" content="#d97a52">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>English Daily Coach - Luyện tập & Tự động đồng bộ tiến độ Tiếng Anh Lớp 8</title>
+
+  <!-- Inline Web App Manifest for PWA Installability -->
+  <link rel="manifest" href="data:application/manifest+json;utf8,{
+    %22name%22:%22English%20Daily%20Coach%22,
+    %22short_name%22:%22EnglishCoach%22,
+    %22start_url%22:%22./index.html%22,
+    %22display%22:%22standalone%22,
+    %22background_color%22:%22%23fdf2e3%22,
+    %22theme_color%22:%22%23d97a52%22,
+    %22icons%22:[{%22src%22:%22https://github.githubassets.com/favicons/favicon.png%22,%22sizes%22:%22192x192%22,%22type%22:%22image/png%22}]
+  }">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -17,56 +32,156 @@
       color: #4a3b30;
     }
     .container {
-      max-width: 720px;
+      max-width: 780px;
       width: 100%;
-      background: rgba(255,255,255,0.55);
-      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(14px);
       border: 1px solid rgba(74,59,48,0.12);
       border-radius: 24px;
-      padding: 40px 36px;
-      box-shadow: 0 8px 32px rgba(74,59,48,0.08);
+      padding: 36px 32px;
+      box-shadow: 0 10px 36px rgba(74,59,48,0.08);
+    }
+    .logo-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
     .logo {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
+      gap: 14px;
     }
     .logo-icon {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       background: #d97a52;
-      border-radius: 14px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 26px;
       color: #fff;
+      box-shadow: 0 4px 14px rgba(217,122,82,0.3);
     }
     .logo-text h1 {
-      font-size: 24px;
-      font-weight: 700;
+      font-size: 22px;
+      font-weight: 800;
     }
     .logo-text p {
-      font-size: 14px;
+      font-size: 13px;
       color: #8a7a6a;
     }
+    .action-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .add-btn {
+      background: #d97a52;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.15s ease, background 0.15s ease;
+      box-shadow: 0 4px 12px rgba(217,122,82,0.25);
+    }
+    .add-btn:hover {
+      background: #c56842;
+      transform: translateY(-1px);
+    }
+    .add-btn.secondary {
+      background: rgba(217,122,82,0.14);
+      color: #d97a52;
+      box-shadow: none;
+      border: 1px solid rgba(217,122,82,0.2);
+    }
+    .add-btn.secondary:hover {
+      background: rgba(217,122,82,0.22);
+    }
+
+    /* Auto Sync Status Bar */
+    .sync-status-bar {
+      background: rgba(122,154,110,0.15);
+      border: 1px solid rgba(122,154,110,0.3);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #4a663e;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid rgba(74,59,48,0.08);
+      padding-bottom: 12px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      color: #8a7a6a;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      color: #4a3b30;
+      background: rgba(255,255,255,0.5);
+    }
+    .tab-btn.active {
+      color: #d97a52;
+      background: rgba(217,122,82,0.12);
+    }
+
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
     .intro {
-      margin-bottom: 32px;
-      padding: 20px;
       background: rgba(255,255,255,0.5);
       border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
       border: 1px solid rgba(74,59,48,0.08);
     }
     .intro h2 {
-      font-size: 18px;
-      margin-bottom: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #d97a52;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .intro p {
-      font-size: 14px;
-      line-height: 1.7;
+      font-size: 13px;
+      line-height: 1.6;
       color: #5a4b40;
     }
+
     .week-label {
       display: inline-block;
       background: #d97a52;
@@ -75,7 +190,7 @@
       font-weight: 700;
       padding: 4px 14px;
       border-radius: 20px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .lesson-list {
       display: flex;
@@ -86,10 +201,10 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      background: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.7);
       border: 1px solid rgba(74,59,48,0.1);
       border-radius: 14px;
-      padding: 16px 18px;
+      padding: 14px 18px;
       text-decoration: none;
       color: inherit;
       transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
@@ -97,24 +212,24 @@
     .lesson-card:hover {
       transform: translateY(-2px);
       border-color: #d97a52;
-      box-shadow: 0 6px 20px rgba(217,122,82,0.12);
+      box-shadow: 0 6px 20px rgba(217,122,82,0.14);
     }
     .lesson-day {
-      width: 42px;
-      height: 42px;
+      width: 52px;
+      height: 44px;
       border-radius: 12px;
-      background: rgba(217,122,82,0.1);
+      background: rgba(217,122,82,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 14px;
+      font-weight: 800;
+      font-size: 13px;
       color: #d97a52;
       flex-shrink: 0;
     }
     .lesson-info h3 {
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
     }
     .lesson-info p {
       font-size: 12px;
@@ -125,9 +240,88 @@
       margin-left: auto;
       color: #8a7a6a;
       font-size: 18px;
+      font-weight: bold;
     }
+
+    .report-box {
+      background: #fff;
+      border: 1px solid rgba(74,59,48,0.12);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 14px;
+    }
+    .report-box input, .report-box textarea {
+      width: 100%;
+      border: 1px solid rgba(74,59,48,0.15);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+      margin-top: 8px;
+      font-family: inherit;
+    }
+
+    /* Modal Import */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 20px;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal {
+      background: #fbf6ee;
+      border-radius: 20px;
+      padding: 28px;
+      max-width: 540px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .modal h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #d97a52;
+    }
+    .modal p {
+      font-size: 13px;
+      color: #5a4b40;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .modal textarea {
+      width: 100%;
+      height: 140px;
+      border: 1px solid rgba(74,59,48,0.15);
+      border-radius: 12px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 12px;
+      resize: vertical;
+      background: #fff;
+    }
+    .modal-actions {
+      margin-top: 16px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .btn-cancel {
+      background: rgba(74,59,48,0.1);
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
     .footer {
-      margin-top: 28px;
+      margin-top: 32px;
       text-align: center;
       font-size: 12px;
       color: #8a7a6a;
@@ -136,226 +330,407 @@
 </head>
 <body>
   <div class="container">
-    <div class="logo">
-      <div class="logo-icon">&#127891;</div>
-      <div class="logo-text">
-        <h1>English Daily Coach</h1>
-        <p>Luyện tập tiếng Anh mỗi ngày</p>
+    <div class="logo-bar">
+      <div class="logo">
+        <img src="logo.jpg" alt="English Center Logo" class="logo-img" style="width:52px; height:52px; border-radius:16px; object-fit:cover; box-shadow:0 4px 14px rgba(217,122,82,0.3);" />
+        <div class="logo-text">
+          <h1>English Daily Coach</h1>
+          <p>Học &amp; Tự động đồng bộ tiến độ tiếng Anh tương tác</p>
+        </div>
       </div>
+      <button class="account-btn" id="open-account-modal" style="background:#fff; border:1px solid rgba(217,122,82,0.35); border-radius:20px; padding:8px 16px; font-size:13px; font-weight:700; color:#d97a52; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 3px 12px rgba(217,122,82,0.12); transition:all 0.15s ease;">
+        <span id="account-status-icon">👤</span>
+        <span id="account-status-text">Tạo Tài Khoản / Đăng Nhập</span>
+      </button>
     </div>
 
-    <div class="intro">
-      <h2>&#128218; Chào mừng bạn đến với English Daily Coach!</h2>
-      <p>
-        Chương trình luyện tập tiếng Anh 21 ngày dành cho người mới bắt đầu.
-        Mỗi bài học bao gồm từ vựng, ngữ pháp, hội thoại thực tế và bài tập
-        tương tác giúp bạn ghi nhớ sâu hơn. Hãy bắt đầu hành trình chinh phục
-        tiếng Anh ngay hôm nay!
-      </p>
-    </div>
-
-    <div class="week-label">&#128197; Tuần 1 &mdash; Cơ bản</div>
+                    <div class="week-label">&#128216; Cụm 1: 7 Thì Cơ Bản</div>
     <div class="lesson-list">
-      <a class="lesson-card" href="english-w1d1.html">
-        <div class="lesson-day">01</div>
+      <a class="lesson-card" href="english-g8-s1.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 1</div>
         <div class="lesson-info">
-          <h3>Chào hỏi cơ bản</h3>
-          <p>Basic Greetings</p>
+          <h3>Hiện tại đơn vs. Hiện tại tiếp diễn</h3>
+          <p>Present Simple vs. Present Continuous</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w1d2.html">
-        <div class="lesson-day">02</div>
+      <a class="lesson-card" href="english-g8-s2.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 2</div>
         <div class="lesson-info">
-          <h3>Giới thiệu bản thân</h3>
-          <p>Self-introduction</p>
+          <h3>Quá khứ đơn vs. Quá khứ tiếp diễn</h3>
+          <p>Past Simple vs. Past Continuous with When & While</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w1d3.html">
-        <div class="lesson-day">03</div>
+      <a class="lesson-card" href="english-g8-s3.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 3</div>
         <div class="lesson-info">
-          <h3>Số đếm &amp; Hỏi tuổi</h3>
-          <p>Numbers &amp; Asking Age</p>
+          <h3>Tương lai đơn vs. Tương lai gần</h3>
+          <p>Future Simple (Will) vs. Near Future (Be going to)</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w1d4.html">
-        <div class="lesson-day">04</div>
+      <a class="lesson-card" href="english-g8-s4.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 4</div>
         <div class="lesson-info">
-          <h3>Hỏi thăm cảm xúc &amp; tình trạng</h3>
-          <p>Feelings &amp; Status</p>
+          <h3>Thì Hiện tại hoàn thành</h3>
+          <p>Present Perfect Tense with Since/For/Already/Yet</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w1d5.html">
-        <div class="lesson-day">05</div>
+      <a class="lesson-card" href="english-g8-s5.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" style="background: #e6b198; color: white;">Bài 5</div>
         <div class="lesson-info">
-          <h3>Mô tả đồ vật bằng This / That</h3>
-          <p>This / That &amp; Objects</p>
-        </div>
-        <div class="lesson-arrow">&#8594;</div>
-      </a>
-
-      <a class="lesson-card" href="english-w1d6.html">
-        <div class="lesson-day">06</div>
-        <div class="lesson-info">
-          <h3>Hỏi Yes/No với TO BE</h3>
-          <p>Yes/No Questions with TO BE</p>
-        </div>
-        <div class="lesson-arrow">&#8594;</div>
-      </a>
-
-      <a class="lesson-card" href="english-w1d7.html">
-        <div class="lesson-day">07</div>
-        <div class="lesson-info">
-          <h3>Ôn tập tổng hợp Tuần 1</h3>
-          <p>Week 1 Review</p>
+          <h3>Tổng ôn Ma trận 7 Thì & Bài tập</h3>
+          <p>Mastery Review of 7 Core Tenses & Sentence Transformation</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
     </div>
 
-    <div class="week-label" style="margin-top: 32px;">&#128197; Tuần 2 &mdash; Giao tiếp &amp; Ngữ pháp mở rộng</div>
+    <div class="week-label">&#128216; Cụm 2: Ngữ Pháp Nền Tảng</div>
     <div class="lesson-list">
-      <a class="lesson-card" href="english-w2d1.html">
-        <div class="lesson-day">01</div>
+      <a class="lesson-card" href="english-g8-s6.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 6</div>
         <div class="lesson-info">
-          <h3>Gia đình &amp; Tính từ sở hữu</h3>
-          <p>Family &amp; Possessive Adjectives</p>
+          <h3>Động từ chỉ sở thích + V-ing / to V</h3>
+          <p>Verbs of liking (Love, like, hate, mind...)</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w2d2.html">
-        <div class="lesson-day">02</div>
+      <a class="lesson-card" href="english-g8-s7.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 7</div>
         <div class="lesson-info">
-          <h3>Nghề nghiệp &amp; Hiện tại đơn</h3>
-          <p>Jobs &amp; Present Simple</p>
+          <h3>So sánh hơn & So sánh nhất</h3>
+          <p>Comparative & Superlative forms of Adjectives/Adverbs</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w2d3.html">
-        <div class="lesson-day">03</div>
+      <a class="lesson-card" href="english-g8-s8.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 8</div>
         <div class="lesson-info">
-          <h3>Sở thích</h3>
-          <p>Hobbies</p>
+          <h3>Mạo từ: a, an, the, rỗng</h3>
+          <p>Articles (a, an, the, zero article)</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w2d4.html">
-        <div class="lesson-day">04</div>
+      <a class="lesson-card" href="english-g8-s9.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 9</div>
         <div class="lesson-info">
-          <h3>Phủ định &amp; Trạng từ tần suất</h3>
-          <p>Negatives &amp; Frequency Adverbs</p>
+          <h3>Từ để hỏi & Câu hỏi đuôi</h3>
+          <p>Question words & Tag questions</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w2d5.html">
-        <div class="lesson-day">05</div>
+      <a class="lesson-card" href="english-g8-s10.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" style="background: #e6b198; color: white;">Bài 10</div>
         <div class="lesson-info">
-          <h3>Câu hỏi với Do / Does</h3>
-          <p>Questions with Do / Does</p>
-        </div>
-        <div class="lesson-arrow">&#8594;</div>
-      </a>
-
-      <a class="lesson-card" href="english-w2d6.html">
-        <div class="lesson-day">06</div>
-        <div class="lesson-info">
-          <h3>Ghép câu với And / But / So</h3>
-          <p>Connecting Ideas: And / But / So</p>
-        </div>
-        <div class="lesson-arrow">&#8594;</div>
-      </a>
-
-      <a class="lesson-card" href="english-w2d7.html">
-        <div class="lesson-day">07</div>
-        <div class="lesson-info">
-          <h3>Ôn tập tổng hợp Tuần 2</h3>
-          <p>Week 2 Review</p>
+          <h3>Bài thi Tổng Ôn Cụm 2</h3>
+          <p>Review Test 2 (Lessons 6-9)</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
     </div>
 
-
-    <div class="week-label" style="margin-top: 32px;">&#128197; Tuần 3 &mdash; Mô tả đồ vật, không gian &amp; so sánh</div>
+    <div class="week-label">&#128216; Cụm 3: Câu Phức & Điều Kiện</div>
     <div class="lesson-list">
-      <a class="lesson-card" href="english-w3d1.html">
-        <div class="lesson-day">01</div>
+      <a class="lesson-card" href="english-g8-s11.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 11</div>
         <div class="lesson-info">
-          <h3>Mạo từ a / an / the &amp; Màu sắc</h3>
-          <p>Articles a/an/the &amp; Colors</p>
+          <h3>Câu đơn, câu ghép, câu phức</h3>
+          <p>Simple, compound, complex sentences & Conjunctions</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w3d2.html">
-        <div class="lesson-day">02</div>
+      <a class="lesson-card" href="english-g8-s12.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 12</div>
         <div class="lesson-info">
-          <h3>There is / There are</h3>
-          <p>Describing Rooms &amp; Spaces</p>
+          <h3>Động từ khuyết thiếu cơ bản</h3>
+          <p>Modal verbs: Should, Shouldn't, Have to, Must</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w3d3.html">
-        <div class="lesson-day">03</div>
+      <a class="lesson-card" href="english-g8-s13.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 13</div>
         <div class="lesson-info">
-          <h3>Hỏi đường &amp; Chỉ đường</h3>
-          <p>Asking &amp; Giving Directions</p>
+          <h3>Câu điều kiện Loại 1</h3>
+          <p>Conditional sentences Type 1</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w3d4.html">
-        <div class="lesson-day">04</div>
+      <a class="lesson-card" href="english-g8-s14.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 14</div>
         <div class="lesson-info">
-          <h3>Đếm được &amp; Không đếm được</h3>
-          <p>Countable &amp; Uncountable Nouns</p>
+          <h3>Câu điều kiện Loại 2</h3>
+          <p>Conditional sentences Type 2</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w3d5.html">
-        <div class="lesson-day">05</div>
+      <a class="lesson-card" href="english-g8-s15.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" style="background: #e6b198; color: white;">Bài 15</div>
         <div class="lesson-info">
-          <h3>Mô tả ngôi nhà &amp; Số nhiều bất quy tắc</h3>
-          <p>Describing Your Home &amp; Irregular Plurals</p>
+          <h3>Bài thi Tổng Ôn Cụm 3</h3>
+          <p>Review Test 3 (Lessons 11-14)</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
+    </div>
 
-      <a class="lesson-card" href="english-w3d6.html">
-        <div class="lesson-day">06</div>
+    <div class="week-label">&#128216; Cụm 4: Bị Động & Gián Tiếp</div>
+    <div class="lesson-list">
+      <a class="lesson-card" href="english-g8-s16.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 16</div>
         <div class="lesson-info">
-          <h3>So sánh hơn</h3>
-          <p>Comparative Adjectives</p>
+          <h3>Thể bị động ở Hiện tại & Quá khứ</h3>
+          <p>Passive voice in Present and Past tenses</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
-
-      <a class="lesson-card" href="english-w3d7.html">
-        <div class="lesson-day">07</div>
+      <a class="lesson-card" href="english-g8-s17.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 17</div>
         <div class="lesson-info">
-          <h3>Ôn tập tổng hợp Tuần 3</h3>
-          <p>Week 3 Review</p>
+          <h3>Thể bị động ở Tương lai & Modal verbs</h3>
+          <p>Passive voice in Future and with Modal verbs</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+      <a class="lesson-card" href="english-g8-s18.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 18</div>
+        <div class="lesson-info">
+          <h3>Câu gián tiếp: Câu kể</h3>
+          <p>Reported Speech (Statements)</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+      <a class="lesson-card" href="english-g8-s19.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 19</div>
+        <div class="lesson-info">
+          <h3>Câu gián tiếp: Câu hỏi</h3>
+          <p>Reported Speech (Questions)</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+      <a class="lesson-card" href="english-g8-s20.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" style="background: #e6b198; color: white;">Bài 20</div>
+        <div class="lesson-info">
+          <h3>Bài thi Tổng Ôn Cụm 4</h3>
+          <p>Review Test 4 (Lessons 16-19)</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+    </div>
+
+    <div class="week-label">&#128216; Cụm 5: Tương Lai & Phrasal Verbs</div>
+    <div class="lesson-list">
+      <a class="lesson-card" href="english-g8-s21.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 21</div>
+        <div class="lesson-info">
+          <h3>Tương lai tiếp diễn</h3>
+          <p>Future Continuous Tense</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+      <a class="lesson-card" href="english-g8-s22.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 22</div>
+        <div class="lesson-info">
+          <h3>Động từ khuyết thiếu dự đoán</h3>
+          <p>Modal verbs of probability (May, Might, Can, Could)</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+      <a class="lesson-card" href="english-g8-s23.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 23</div>
+        <div class="lesson-info">
+          <h3>Cấu trúc quen với (Used to)</h3>
+          <p>Used to vs. Be/Get used to doing something</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+      <a class="lesson-card" href="english-g8-s24.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 24</div>
+        <div class="lesson-info">
+          <h3>Cụm động từ thường gặp</h3>
+          <p>Common Phrasal Verbs in Grade 8</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+      <a class="lesson-card" href="english-g8-s25.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" style="background: #e6b198; color: white;">Bài 25</div>
+        <div class="lesson-info">
+          <h3>Bài thi Tổng Ôn Cụm 5</h3>
+          <p>Review Test 5 (Lessons 21-24)</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+    </div>
+
+    <div class="week-label">&#128216; Cụm 6: Chuyên Đề Mở Rộng</div>
+    <div class="lesson-list">
+      <a class="lesson-card" href="english-g8-s26.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 26</div>
+        <div class="lesson-info">
+          <h3>Danh động từ & Động từ nguyên thể</h3>
+          <p>Gerunds & Infinitives (Advanced)</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+      <a class="lesson-card" href="english-g8-s27.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 27</div>
+        <div class="lesson-info">
+          <h3>Lượng từ cơ bản & nâng cao</h3>
+          <p>Quantifiers: much, many, a lot of, a few, a little</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+      <a class="lesson-card" href="english-g8-s28.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 28</div>
+        <div class="lesson-info">
+          <h3>Giới từ thời gian, nơi chốn & Câu cảm thán</h3>
+          <p>Prepositions & Exclamatory sentences (What/How)</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+      <a class="lesson-card" href="english-g8-s29.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" >Bài 29</div>
+        <div class="lesson-info">
+          <h3>Cấu trúc cầu khiến / sai khiến</h3>
+          <p>Structures with Make, Let, Have, Get</p>
+        </div>
+        <div class="lesson-arrow">&#8594;</div>
+      </a>
+      <a class="lesson-card" href="english-g8-s30.html" style="opacity: 1; margin-bottom: 10px;">
+        <div class="lesson-day" style="background: #e6b198; color: white;">Bài 30</div>
+        <div class="lesson-info">
+          <h3>BÀI THI TỐT NGHIỆP TOÀN KHÓA</h3>
+          <p>FINAL EXAM - Mastery of Grade 8 Grammar</p>
         </div>
         <div class="lesson-arrow">&#8594;</div>
       </a>
     </div>
 
     <div class="footer">
-      English Daily Coach &mdash; Luyện tập mỗi ngày, tiến bộ mỗi ngày
+      English Daily Coach &mdash; Tự động lưu &amp; đồng bộ tiến độ sau mỗi lần thoát App
     </div>
   </div>
+
+  <!-- MODAL ĐĂNG NHẬP / NHẬP HỌ TÊN HỌC SINH -->
+  <div class="modal-overlay" id="account-modal">
+    <div class="modal" style="max-width:400px; text-align:center;">
+      <h2 style="font-size:20px; margin-bottom:6px; color:#d97a52;">👤 Thông Tin Học Sinh</h2>
+      <p style="font-size:12px; color:#666; margin-bottom:18px; line-height:1.5;">Nhập Họ tên 1 lần duy nhất để kết quả học tập tự động gửi về file Google Sheets của Thầy/Cô.</p>
+      
+      <div style="text-align:left; margin-bottom:20px;">
+        <label style="font-size:12px; font-weight:700; color:#4a3b30;">Họ và Tên Học Sinh:</label>
+        <input type="text" id="acc-name-input" placeholder="Ví dụ: Nguyễn Văn A" style="width:100%; padding:11px 14px; border-radius:10px; border:1px solid rgba(74,59,48,0.2); margin-top:6px; font-size:14px; box-sizing:border-box; background:#fff;" />
+      </div>
+
+      <div style="display:flex; gap:10px; justify-content:center;">
+        <button id="save-account-btn" style="background:#d97a52; color:#fff; border:none; padding:12px 20px; border-radius:12px; font-weight:700; cursor:pointer; font-size:14px; flex:1; box-shadow:0 4px 12px rgba(217,122,82,0.3);">💾 Lưu Thông Tin</button>
+        <button id="close-account-btn" style="background:rgba(74,59,48,0.1); color:#5a4b40; border:none; padding:12px 16px; border-radius:12px; font-weight:700; cursor:pointer; font-size:14px;">Bỏ qua</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Register Service Worker for PWA Offline & Android Installability
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('PWA ServiceWorker ready!', reg))
+          .catch(err => console.log('PWA ServiceWorker error:', err));
+      });
+    }
+
+    const KEY_STREAK = 'eng:streak';
+    const KEY_DAYS = 'eng:completed-days';
+    const KEY_SYNC_URL = 'eng:sync-server-url';
+    const KEY_STUDENT_NAME = 'eng:student-name';
+    const KEY_LAST_SYNC_TIME = 'eng:last-sync-time';
+
+    const DEFAULT_SYNC_URL = 'https://script.google.com/macros/s/AKfycbzVXmeXIu4Tf36Tjs9WiRyvtEB3WTxhSoReXyhqySDnze8aVaFTFW39em2cdfdzlWOR/exec';
+
+    function updateAccountUI() {
+      const name = localStorage.getItem(KEY_STUDENT_NAME);
+      const iconEl = document.getElementById('account-status-icon');
+      const textEl = document.getElementById('account-status-text');
+      
+      if (name) {
+        if (iconEl) iconEl.textContent = '✅';
+        if (textEl) textEl.textContent = `${name}`;
+      } else {
+        if (iconEl) iconEl.textContent = '👤';
+        if (textEl) textEl.textContent = 'Nhập Họ và Tên';
+      }
+    }
+
+    // Auto open popup on first visit ONLY if not logged in
+    window.addEventListener('DOMContentLoaded', () => {
+      updateAccountUI();
+      if (!localStorage.getItem(KEY_STUDENT_NAME)) {
+        setTimeout(() => {
+          const accModal = document.getElementById('account-modal');
+          if (accModal) accModal.classList.add('active');
+        }, 800);
+      }
+    });
+
+    const openAccModalBtn = document.getElementById('open-account-modal');
+    const accModal = document.getElementById('account-modal');
+    const closeAccModalBtn = document.getElementById('close-account-btn');
+    const saveAccBtn = document.getElementById('save-account-btn');
+    const accNameInput = document.getElementById('acc-name-input');
+
+    if (openAccModalBtn) {
+      openAccModalBtn.addEventListener('click', () => {
+        if (accNameInput) accNameInput.value = localStorage.getItem(KEY_STUDENT_NAME) || '';
+        if (accModal) accModal.classList.add('active');
+      });
+    }
+
+    if (closeAccModalBtn) {
+      closeAccModalBtn.addEventListener('click', () => {
+        if (accModal) accModal.classList.remove('active');
+      });
+    }
+
+    if (saveAccBtn) {
+      saveAccBtn.addEventListener('click', () => {
+        const nameVal = accNameInput.value.trim();
+
+        if (!nameVal) {
+          alert('Vui lòng nhập Họ và Tên học sinh!');
+          return;
+        }
+
+        localStorage.setItem(KEY_STUDENT_NAME, nameVal);
+
+        updateAccountUI();
+        if (accModal) accModal.classList.remove('active');
+        triggerAutoSync('Saved Student Name');
+        alert(`🎉 Xin chào ${nameVal}! Thông tin của bạn đã được lưu. Kết quả học sẽ tự động gửi về file Google Sheets của Thầy/Cô.`);
+      });
+    }
+
+    // AUTO-SYNC ENGINE AFTER EXITING/HIDING APP
+    function triggerAutoSync(exitReason) {
+      const name = localStorage.getItem(KEY_STUDENT_NAME) || 'Học sinh chưa nhập tên';
+      const completedDays = JSON.parse(localStorage.getItem(KEY_DAYS) || '[]');
+      const streak = localStorage.getItem(KEY_STREAK) || '1';
+      const now = new Date().toLocaleString('vi-VN');
+
+      const payload = {
+        name,
+        completedCount: completedDays.length,
+        completedDays,
+        streak,
+        timestamp: now,
+        reason: exitReason || 'App Exit / Hide'
+      };
+
+      // Save local sync snapshot
+      localStorage.setItem('eng:last-sync-snapshot', JSON.stringify(payload));
+      localStorage.setItem(KEY_LAST_SYNC_TIME, now);
+    }
+  </script>
 </body>
 </html>
